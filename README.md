@@ -2,11 +2,11 @@
 I Love **Minecraft**
 ____________________
 ## site
-(clickfast.kro.kr)
+(https://clickfast.kro.kr)
 
-(neramc.github.io)
+(https://neramc.github.io)
 
-(1dollar.kro.kr)
+(https://1dollar.kro.kr)
 ____________________
 ## Project
 **empty**
