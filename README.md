@@ -4,9 +4,11 @@ ____________________
 ## site
 [clickfast](https://clickfast.kro.kr)
 
-(https://neramc.github.io)
+[github pages](https://neramc.github.io)
 
-(https://1dollar.kro.kr)
+[1dollar](https://1dollar.kro.kr)
+
+[fnchart](http://fnchart.kro.kr)
 ____________________
 ## Project
 **empty**
