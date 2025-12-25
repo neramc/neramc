@@ -30,4 +30,13 @@ ______studio______
 
 </div>
 
+<details close>
+<summary><b>진행중인 프로젝트</b></summary>
+
+* 통합 STUDIO 협업/소개 사이트
+
+* 블록게임 
+
+</details>
+
 _________________
