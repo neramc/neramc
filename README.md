@@ -4,7 +4,7 @@
 
 **웹개발 주로 합니다**
 
-![Static Badge](https://img.shields.io/badge/Github-repo-blue?style=plastic&logo=github)
+![Static Badge](https://img.shields.io/badge/Github-repo-blue?style=plastic&logo=github&link=https%3A%2F%2Fgithub.com%2Fneramc%2Fneramc)
 
 
 </div>
