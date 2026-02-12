@@ -1,0 +1,200 @@
+[Adblock Plus 2.0]
+! Title: Block Filter
+! Description: Blocking more ads…
+! Version: 1.0.0
+! Expires: 1 days
+! Homepage: local
+! License: CC-BY-4.0 (suggested)
+!
+! ============================
+! Core ad networks (Global)
+! ============================
+
+||doubleclick.net^
+||googleads.g.doubleclick.net^
+||googlesyndication.com^
+||tpc.googlesyndication.com^
+||pagead2.googlesyndication.com^
+||adservice.google.com^
+||adservice.google.co.kr^
+||googleadservices.com^
+||googletagservices.com^
+||googletagmanager.com/gtag/js?id=AW-$script,third-party
+||gstatic.com/ads^
+||adnxs.com^
+||adform.net^
+||criteo.com^
+||criteo.net^
+||taboola.com^
+||outbrain.com^
+||rubiconproject.com^
+||pubmatic.com^
+||openx.net^
+||indexexchange.com^
+||adsrvr.org^
+||scorecardresearch.com^
+||quantserve.com^
+||moatads.com^
+||doubleverify.com^
+||adobedtm.com^
+||ads-twitter.com^
+||adsystem.com^
+||zedo.com^
+||serving-sys.com^
+||smartadserver.com^
+||smaato.net^
+||unityads.unity3d.com^
+||applovin.com^
+||appsflyer.com^
+||adjust.com^
+||branch.io^
+||kochava.com^
+
+! ============================
+! Meta / Facebook basic ad & tracking endpoints (careful)
+! (May affect some embedded widgets)
+! ============================
+||facebook.com/tr^$third-party
+||connect.facebook.net/en_US/fbevents.js$script,third-party
+||connect.facebook.net/*/fbevents.js$script,third-party
+
+! ============================
+! TikTok / ByteDance (careful)
+! ============================
+||ads.tiktok.com^
+||analytics.tiktok.com^
+||business-api.tiktok.com^
+||tiktok.com/i18n/interaction/report^
+||tiktok.com/api/ads^
+||tiktok.com/api/ad^
+||tiktok.com/api/v2/policy/notice^$third-party
+
+! ============================
+! Amazon Ads (careful)
+! ============================
+||amazon-adsystem.com^
+||aax-us-iad.amazon.com^
+||aax-eu.amazon.com^
+||fls-na.amazon.com^
+||adtago.s3.amazonaws.com^$third-party
+
+! ============================
+! Microsoft / Bing Ads
+! ============================
+||bat.bing.com^
+||bingads.microsoft.com^
+||c.bing.com/c.gif$third-party
+
+! ============================
+! Cosmetic filters: remove ad frames + empty ad slots
+! (Global, generic)
+! ============================
+
+! Common "Advertisement" labels / sponsor blocks
+##[aria-label*="advertisement" i]
+##[aria-label*="ads" i]
+##[aria-label*="sponsored" i]
+##[aria-label*="sponsor" i]
+##[class*="advert" i]
+##[class*="advertisement" i]
+##[class*="sponsor" i]
+##[class*="sponsored" i]
+##[id*="sponsor" i]
+##[id*="sponsored" i]
+
+! Common ad containers (generic but not too wild)
+##.ads
+##.ad
+##.adbox
+##.ad-banner
+##.ad_banner
+##.adContainer
+##.ad-container
+##.ad-wrapper
+##.ad_wrapper
+##.adsbox
+##.ads-box
+##.ads-wrapper
+##.ad-slot
+##.adslot
+##.ad_area
+##.ad-area
+##.adUnit
+##.ad-unit
+##.dfp-ad
+##.gpt-ad
+##.banner-ad
+##.banner_ads
+##.banner-ads
+##.sponsored
+##.sponsor
+
+! Google AdSense / GPT typical elements
+##.adsbygoogle
+##ins.adsbygoogle
+##iframe[id^="google_ads_iframe_"]
+##div[id^="google_ads_iframe_"]
+##div[id^="div-gpt-ad-"]
+##iframe[src*="doubleclick.net" i]
+##iframe[src*="googlesyndication.com" i]
+##iframe[src*="googleadservices.com" i]
+##iframe[src*="adservice.google.com" i]
+
+! Hide empty ad containers (when ad blocked but "shell" remains)
+##.ad:empty
+##.ads:empty
+##.ad-slot:empty
+##.adslot:empty
+##.ad-container:empty
+##.ad-wrapper:empty
+##[id*="ad" i]:empty
+##[class*="ad" i]:empty
+
+! Collapse common sticky/floating ad shells
+##[style*="position: fixed" i][id*="ad" i]
+##[style*="position: fixed" i][class*="ad" i]
+##[style*="position: sticky" i][id*="ad" i]
+##[style*="position: sticky" i][class*="ad" i]
+
+! ============================
+! Korea-specific (OPTIONAL)
+! Enable by removing the leading "! " from the lines you want.
+! These can affect portal services if too aggressive.
+! ============================
+
+! ---- NAVER ----
+! ||adcr.naver.com^
+! ||adcreative.naver.com^
+! ||nvad.naver.com^
+! ||displayad.naver.com^
+! ||siape.veta.naver.com^
+! ||veta.naver.com^
+! ##[id*="veta" i]
+! ##[class*="veta" i]
+! ##[class*="ad" i][data-area*="veta" i]
+
+! ---- KAKAO / DAUM / ADFIT ----
+! ||adfit.kakao.com^
+! ||t1.daumcdn.net/adfit/^
+! ||ads.daum.net^
+! ##iframe[src*="adfit" i]
+! ##[id*="adfit" i]
+! ##[class*="adfit" i]
+
+! ---- COUPANG ADS ----
+! ||ads.coupang.com^
+! ||ad.coupang.com^
+! ##[id*="ads" i][class*="coupang" i]
+! ##iframe[src*="coupang.com" i][src*="ads" i]
+
+! ---- Reward / Native ads (KR + global)
+! ||buzzvil.com^
+! ||adpopcorn.com^
+! ||dable.io^
+! ||tnkfactory.com^
+! ##[class*="dable" i]
+! ##[id*="dable" i]
+! ##[class*="taboola" i]
+! ##[id*="taboola" i]
+! ##[class*="outbrain" i]
+! ##[id*="outbrain" i]
