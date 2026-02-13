@@ -49,8 +49,7 @@ _________________
 * **K-FILTER** Series
 * Only run on the **AdBlock** and other AdBlock Based Services
 
-<details close>
-<summary><b>K-FILTER</b>(Base)</summary>
+
 
 
 * **K-FILTER**'s base filter
@@ -66,10 +65,8 @@ _________________
 https://cdn.jsdelivr.net/gh/neramc/neramc@master/block/filter_base.txt
 ```
 
-</details>
 
-<details close>
-<summary><b>K-FILTER</b>(Optimized)</summary>
+~~~~~~~~~~~~
 
 
 * **K-FILTER**'s *optimized* filter
@@ -89,10 +86,8 @@ https://cdn.jsdelivr.net/gh/neramc/neramc@master/block/filter_base.txt
 https://cdn.jsdelivr.net/gh/neramc/neramc@master/block/filter_optimized.txt
 ```
 
-</details>
 
-<details close>
-<summary><b>K-FILTER</b>(Lite)</summary>
+~~~~~~~~~~~~
 
 
 * **K-FILTER**'s *lite* filter
@@ -112,6 +107,6 @@ https://cdn.jsdelivr.net/gh/neramc/neramc@master/block/filter_optimized.txt
 https://cdn.jsdelivr.net/gh/neramc/neramc@master/block/filter_lite.txt
 ```
 
-</details>
+
 
 
