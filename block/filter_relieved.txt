@@ -1,0 +1,183 @@
+[Adblock Plus 2.0]
+! Title: Blocking ads more (Relieved Edition)
+! Description: 한국 업체들 위주로 작성했습니다. (완화 버전 - 핵심 광고만 차단)
+! Homepage: https://github.com/neramc/neramc
+! Last modified: 2026-02-12
+! Expires: 3 days
+! License: https://github.com/neramc/neramc
+! Version: 4.0.0 RELIEVED EDITION
+
+!--------------------------!
+!----- General JS API -----!
+!--------------------------!
+! JS API START
+#%#var AG_onLoad=function(func){if(document.readyState==="complete"||document.readyState==="interactive")func();else if(document.addEventListener)document.addEventListener("DOMContentLoaded",func);else if(document.attachEvent)document.attachEvent("DOMContentLoaded",func)};
+#%#var AG_removeElementById = function(id) { var element = document.getElementById(id); if (element && element.parentNode) { element.parentNode.removeChild(element); }};
+#%#var AG_removeElementBySelector = function(selector) { if (!document.querySelectorAll) { return; } var nodes = document.querySelectorAll(selector); if (nodes) { for (var i = 0; i < nodes.length; i++) { if (nodes[i] && nodes[i].parentNode) { nodes[i].parentNode.removeChild(nodes[i]); } } } };
+#%#var AG_each = function(selector, fn) { if (!document.querySelectorAll) return; var elements = document.querySelectorAll(selector); for (var i = 0; i < elements.length; i++) { fn(elements[i]); }; };
+
+!---------------------------------------------!
+!----- Gentle Ad Remover (Non-aggressive) -----!
+!---------------------------------------------!
+#%#var KR_gentleAdRemover = function() { AG_onLoad(function() { var adSelectors = ['ins.kakao_ad_area', 'ins.adsbygoogle', 'ins[data-ad-unit]', 'iframe[src*="googleads"]', 'iframe[src*="doubleclick"]', 'iframe[src*="adfit"]', 'iframe[src*="mobon"]', 'iframe[src*="dable"]', '.revenue_unit_wrap', '.kakao_ad_area']; adSelectors.forEach(function(selector) { AG_each(selector, function(elem) { if (elem && elem.parentNode) { elem.parentNode.removeChild(elem); } }); }); setInterval(function() { AG_each('ins.kakao_ad_area', function(e){ if(e&&e.parentNode) e.parentNode.removeChild(e); }); AG_each('ins.adsbygoogle', function(e){ if(e&&e.parentNode) e.parentNode.removeChild(e); }); }, 2000); }); };
+
+!---------------------------------------------!
+!----- Initialize Gentle Blocker -----!
+!---------------------------------------------!
+#%#AG_onLoad(function() { try { KR_gentleAdRemover(); } catch(e) {} });
+
+! JS API FINISH
+
+!-------------------------------!
+!----- Tracking Protection -----!
+!-------------------------------!
+||analytics.ad.daum.net^
+||analytics.twitter.com^$third-party
+
+!--------------------------------------------------!
+!----- Core Ad Network Scripts Blocking -----!
+!--------------------------------------------------!
+! Google Ads - Essential only
+||pagead2.googlesyndication.com^
+||googleads.g.doubleclick.net^
+||doubleclick.net^
+||googletagservices.com^
+
+! Naver Ads - Core only
+||adpost.naver.com^
+||ad.naver.com^
+||gfp.naver.com^
+||ad.search.naver.com^
+||adcr.naver.com^
+
+! Kakao Adfit - Core only
+||t1.kakaocdn.net/adfit/static/ad.js$script
+||adfit.kakao.com^
+||ads.kakao.com^
+||ad.kakao.com^
+||ad.daum.net^
+
+! Major Korean Ad Networks - Essential only
+||mobon.net^
+||ad.mobon.net^
+||dable.io^
+||static.dable.io^
+||taboola.com^
+||cdn.taboola.com^
+||criteo.com^
+||criteo.net^
+||buzzvil.com^*/ad/*
+||clickmon.co.kr^
+||ad.clickmon.co.kr^
+||adpopcorn.com^
+||cauly.co.kr^
+||ad.cauly.co.kr^
+
+! Coupang Ads
+||ads-partners.coupang.com^
+||ads.coupang.com^
+
+! Tracking pixels
+||pixel.daangn.com^
+||trillion.toss.im^
+
+!---------------------------!
+!----- Allowed Domains -----!
+!---------------------------!
+@@||res-creatives.maio.jp$important
+@@||media-api.maio.jp$important
+@@||dcinside.co.kr/viewmovie.php^$stealth
+@@||dcinside.co.kr/viewimage.php^$stealth
+@@||cargo.koreanair.com^$important
+@@||tivan.naver.com^$important
+@@||t.co^$important
+@@||weblog.coupang.com^$important
+@@||metrics.icloud.com^$important
+@@||securemetrics.apple.com^$important
+@@||iadsdk.apple.com^$important
+
+!-------------------------------!
+!----- Site Element Hiding -----!
+!-------------------------------!
+
+! ===== Universal Ad Containers (Essential only) =====
+##ins.kakao_ad_area
+##ins.adsbygoogle
+##ins[data-ad-unit]
+##iframe[src*="googleads"]
+##iframe[src*="doubleclick"]
+##iframe[src*="adfit"]
+
+! ===== Tistory =====
+tistory.com##.kakao_ad_area
+tistory.com##.revenue_unit_wrap
+tistory.com##ins.adsbygoogle
+tistory.com#%#AG_onLoad(function() { setInterval(function(){ AG_each('ins.kakao_ad_area', function(e){ if(e&&e.parentNode) e.parentNode.removeChild(e); }); AG_each('ins.adsbygoogle', function(e){ if(e&&e.parentNode) e.parentNode.removeChild(e); }); }, 2000); });
+
+! ===== Naver Blog =====
+m.blog.naver.com###ssp-adda
+m.blog.naver.com###ssp-adcontent
+m.blog.naver.com###ssp-adpost
+
+! ===== Naver Main =====
+www.naver.com###NM_TOP_BANNER
+m.naver.com###HOME_AD
+
+! ===== Naver Cafe =====
+m.cafe.naver.com##.CafeAppBanner
+
+! ===== Daum =====
+daum.net##.content_ad
+
+! ===== DCInside =====
+gall.dcinside.com##.kakao_ad_area
+gall.dcinside.com###admaru
+m.dcinside.com##.adv-group
+
+! ===== Fmkorea =====
+fmkorea.com###adpost
+m.fmkorea.com##.adpost
+
+! ===== Clien =====
+clien.net##div#naverAd
+m.clien.net##div#naverAd2
+
+! ===== Meeco =====
+meeco.kr#$#.xe_content { opacity: 1 !important; }
+
+! ===== EveryTime =====
+everytime.kr###sheet
+
+! ===== Coupang =====
+coupang.com###coupang-banner
+coupang.com##.ads-impression
+coupang.com##.promotion-banner
+
+! ===== Danawa =====
+danawa.com###main-middlebnr
+prod.danawa.com###floatAdLayer
+
+! ===== Twitter/X =====
+twitter.com##.promoted-tweet
+twitter.com##.promoted-account
+twitter.com##.promoted-trend
+
+! ===== pixiv =====
+pixiv.net###header-banner
+
+! ===== Namuwiki =====
+namu.wiki##iframe[src*="arca.live/static/ad/"]
+
+!----------------------------------------!
+!----- Adblock Warning Removal (Basic) -----!
+!----------------------------------------!
+###adblock_screen
+###adblock_message
+##.adblock_msg
+##.ad-blocker-warning
+###AdBlockDialog
+###adblock-alert
+###adblock-modal
+##.adblock-message
+
+! ===== End of filter list =====
