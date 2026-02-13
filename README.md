@@ -52,9 +52,10 @@ _________________
 <details close>
 <summary><b>K-FILTER</b>(Base)</summary>
 
+
 * **K-FILTER**'s base filter
 
-> [!Important]
+> [!IMPORTANT]
 > Only run on the ***AdBlock***
 
 * **URL**
@@ -70,12 +71,13 @@ https://cdn.jsdelivr.net/gh/neramc/neramc@master/block/filter_base.txt
 <details close>
 <summary><b>K-FILTER</b>(Optimized)</summary>
 
+
 * **K-FILTER**'s *optimized* filter
 
-> [!Important]
+> [!IMPORTANT]
 > Only run on the ***AdBlock***
 
-> [!Note]
+> [!NOTE]
 > This filter is ***Optimized edition**
 > 
 
@@ -92,12 +94,13 @@ https://cdn.jsdelivr.net/gh/neramc/neramc@master/block/filter_optimized.txt
 <details close>
 <summary><b>K-FILTER</b>(Lite)</summary>
 
+
 * **K-FILTER**'s *lite* filter
 
-> [!Important]
+> [!IMPORTANT]
 > Only run on the ***AdBlock***
 
-> [!Note]
+> [!NOTE]
 > This filter is ***Lite edition**
 >
 
