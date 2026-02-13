@@ -66,7 +66,7 @@ https://cdn.jsdelivr.net/gh/neramc/neramc@master/block/filter_base.txt
 ```
 
 
-~~~~~~~~~~~~
+------------
 
 
 * **K-FILTER**'s *optimized* filter
@@ -86,8 +86,7 @@ https://cdn.jsdelivr.net/gh/neramc/neramc@master/block/filter_base.txt
 https://cdn.jsdelivr.net/gh/neramc/neramc@master/block/filter_optimized.txt
 ```
 
-
-~~~~~~~~~~~~
+------------
 
 
 * **K-FILTER**'s *lite* filter
