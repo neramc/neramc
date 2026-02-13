@@ -43,3 +43,12 @@ ______studio______
 </details>
 
 _________________
+
+## AdBlock Filter
+
+<details close>
+<summary><b>K-FILTER</b>(Base)</summary>
+
+[https://cdn.jsdelivr.net/gh/neramc/neramc@master/block/filter_base.txt](https://cdn.jsdelivr.net/gh/neramc/neramc@master/block/filter_base.txt)
+
+</details>
