@@ -4,7 +4,7 @@
 ! Homepage: https://github.com/neramc/neramc
 ! Last modified: 2026-02-12
 ! Author: neramc
-! Expires: 1 days
+! Expires: 2 days
 ! License: MIT License
 ! Version: 2.0.0 Optimized Edition
 
