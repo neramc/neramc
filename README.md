@@ -46,9 +46,69 @@ _________________
 
 ## AdBlock Filter
 
+* **K-FILTER** Series
+* Only run on the **AdBlock** and other AdBlock Based Services
+
 <details close>
 <summary><b>K-FILTER</b>(Base)</summary>
 
+* **K-FILTER**'s base filter
+
+> [!Important]
+> Only run on the ***AdBlock***
+
+* **URL**
 [https://cdn.jsdelivr.net/gh/neramc/neramc@master/block/filter_base.txt](https://cdn.jsdelivr.net/gh/neramc/neramc@master/block/filter_base.txt)
 
+* **COPY**
+```
+https://cdn.jsdelivr.net/gh/neramc/neramc@master/block/filter_base.txt
+```
+
 </details>
+
+<details close>
+<summary><b>K-FILTER</b>(Optimized)</summary>
+
+* **K-FILTER**'s *optimized* filter
+
+> [!Important]
+> Only run on the ***AdBlock***
+
+> [!Note]
+> This filter is ***Optimized edition**
+> 
+
+* **URL**
+[https://cdn.jsdelivr.net/gh/neramc/neramc@master/block/filter_optimized.txt](https://cdn.jsdelivr.net/gh/neramc/neramc@master/block/filter_optimized.txt)
+
+* **COPY**
+```
+https://cdn.jsdelivr.net/gh/neramc/neramc@master/block/filter_optimized.txt
+```
+
+</details>
+
+<details close>
+<summary><b>K-FILTER</b>(Lite)</summary>
+
+* **K-FILTER**'s *lite* filter
+
+> [!Important]
+> Only run on the ***AdBlock***
+
+> [!Note]
+> This filter is ***Lite edition**
+>
+
+* **URL**
+[https://cdn.jsdelivr.net/gh/neramc/neramc@master/block/filter_lite.txt](https://cdn.jsdelivr.net/gh/neramc/neramc@master/block/filter_lite.txt)
+
+* **COPY**
+```
+https://cdn.jsdelivr.net/gh/neramc/neramc@master/block/filter_lite.txt
+```
+
+</details>
+
+
