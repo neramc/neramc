@@ -1,0 +1,857 @@
+[Adblock Plus 2.0]
+! Title: K-FILTER(Base filter)
+! Description: K-FILTER: 한국 광고업체들의 광고와 광고보드를 차단해 줍니다. 전부 차단 해주지는 못하므로 다른 필터들과 함께 이용해주세요. Adblock Warning Removal List 와 함께 사용하면 좋습니다.
+! Author: neramc
+! Homepage: https://github.com/neramc/neramc
+! Last modified: 2026-02-13
+! Expires: 2 days
+! License: MIT License
+! Version: 3.0.1 Base Edition
+
+!--------------------------!
+!----- General JS API -----!
+!--------------------------!
+! JS API START
+#%#var AG_onLoad=function(func){if(document.readyState==="complete"||document.readyState==="interactive")func();else if(document.addEventListener)document.addEventListener("DOMContentLoaded",func);else if(document.attachEvent)document.attachEvent("DOMContentLoaded",func)};
+#%#var AG_removeElementById = function(id) { var element = document.getElementById(id); if (element && element.parentNode) { element.parentNode.removeChild(element); }};
+#%#var AG_removeElementBySelector = function(selector) { if (!document.querySelectorAll) { return; } var nodes = document.querySelectorAll(selector); if (nodes) { for (var i = 0; i < nodes.length; i++) { if (nodes[i] && nodes[i].parentNode) { nodes[i].parentNode.removeChild(nodes[i]); } } } };
+#%#var AG_each = function(selector, fn) { if (!document.querySelectorAll) return; var elements = document.querySelectorAll(selector); for (var i = 0; i < elements.length; i++) { fn(elements[i]); }; };
+#%#var AG_removeParent = function(el, fn) { while (el && el.parentNode) { if (fn(el)) { el.parentNode.removeChild(el); return; } el = el.parentNode; } };
+#%#var AG_removeCookie=function(a){var e=/./;/^\/.+\/$/.test(a)?e=new RegExp(a.slice(1,-1)):""!==a&&(e=new RegExp(a.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")));a=function(){for(var a=document.cookie.split(";"),g=a.length;g--;){cookieStr=a[g];var d=cookieStr.indexOf("=");if(-1!==d&&(d=cookieStr.slice(0,d).trim(),e.test(d)))for(var h=document.location.hostname.split("."),f=0;f<h.length-1;f++){var b=h.slice(f).join(".");if(b){var c=d+"=",k="; domain="+b;b="; domain=."+b;document.cookie=c+"; expires=Thu, 01 Jan 1970 00:00:00 GMT";document.cookie=c+k+"; expires=Thu, 01 Jan 1970 00:00:00 GMT";document.cookie=c+b+"; expires=Thu, 01 Jan 1970 00:00:00 GMT";document.cookie=c+"; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";document.cookie=c+k+"; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";document.cookie=c+b+"; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT"}}}};a();window.addEventListener("beforeunload",a)};
+#%#var AG_defineProperty=function(){var p,q=Object.defineProperty;if("function"==typeof WeakMap)p=WeakMap;else{var r=0,t=function(){this.a=(r+=Math.random()).toString()};t.prototype.set=function(a,b){var d=a[this.a];d&&d[0]===a?d[1]=b:q(a,this.a,{value:[a,b],writable:!0});return this};t.prototype.get=function(a){var b;return(b=a[this.a])&&b[0]===a?b[1]:void 0};t.prototype.has=function(a){var b=a[this.a];return b?b[0]===a:!1};p=t}function u(a){this.b=a;this.h=Object.create(null)}function v(a,b,d,e){this.a=a;this.i=b;this.c=d;this.f=e}function w(){this.g=/^([^\\\.]|\\.)*?\./;this.j=/\\(.)/g;this.a=new p}function x(a,b){var d=b.f;if(d&&!("beforeGet"in d||"beforeSet"in d))return z(d);var e={get:function(){var c=b.f;c&&c.beforeGet&&c.beforeGet.call(this,b.a.b);a:if(c=b.g)c=A(c)?c.value:c.get?c.get.call(this):void 0;else{c=b.a.b;if(b.i in c&&(c=B(c),null!==c)){var d=C.call(c,b.i);c=d?d.call(this):c[b.i];break a}c=void 0}(this===b.a.b||D.call(b.a.b,this))&&E(a,c,b.c);return c},set:function(c){if(this===b.a.b||D.call(b.a.b,this)){b.f&&b.f.beforeSet&&(c=b.f.beforeSet.call(this,c,this));var d=b.g;d&&A(d)&&d.value===c?c=!0:(d=F(b,c,this),G(c)&&(c=H(a,c),I(a,c,b.c)),c=d)}else c=F(b,c,this);return c}};d&&J(d,e,K);return e}function I(a,b,d){for(var e in d.h){var c=d.h[e];if(b.h[e]){var h=a,g=b.h[e],k=c;!k.f||g.f||"undefined"===typeof g.a.b||g.g||(g.g=z(k.f));g.c&&k.c&&g.c!==k.c&&I(h,g.c,k.c)}else{g=h=void 0;k=a;var f=b,l=c.i,m="undefined"!==typeof f.b,y=!1;m&&(g=L(f.b,l))&&!g.configurable&&(y=!0,h=f.b[l]);var n=y?H(k,h):new u(c.c.b);I(k,n,c.c);n=new v(f,l,n,c.f);f.h[l]=n;m&&(n.g=g,m=x(k,n),y?E(k,h,c.c):(q(f.b,l,m),g&&A(g)&&(M(m,g.value,f.b),E(k,g.value,c.c))))}}}function E(a,b,d){G(b)&&(b=H(a,b),I(a,b,d))}function F(a,b,d){var e=a.g;if(!e){e=B(a.a.b);if(null!==e&&(e=N.call(e,a.i)))return e.call(d,b);if(!O(a.a.b))return!1;a.g={value:b,configurable:!0,writable:!0,enumerable:!0};return!0}return M(e,b,d)}function H(a,b){var d=a.a.get(b);d||(d=new u(b),a.a.set(b,d));return d}function A(a){return"undefined"!==typeof a.writable}function J(a,b,d){for(var e=0,c=d.length;e<c;e++){var h=d[e];h in a&&(b[h]=a[h])}}function z(a){if(a){var b={};J(a,b,P);return b}}function M(a,b,d){if(A(a))return a.writable?(a.value=b,!0):!1;if(!a.set)return!1;a.set.call(d,b);return!0}var P="configurable enumerable value get set writable".split(" "),K=P.slice(0,2),L=Object.getOwnPropertyDescriptor,O=Object.isExtensible,B=Object.getPrototypeOf,D=Object.prototype.isPrototypeOf,C=Object.prototype.__lookupGetter__||function(a){return(a=Q(this,a))&&a.get?a.get:void 0},N=Object.prototype.__lookupSetter__||function(a){return(a=Q(this,a))&&a.set?a.set:void 0};function Q(a,b){if(b in a){for(;!w.hasOwnProperty.call(a,b);)a=B(a);return L(a,b)}}function G(a){var b=typeof a;return"function"===b||"object"===b&&null!==a?!0:!1}var R;return function(a,b,d){R||(R=new w);var e=R;d=d||window;var c=new u;a+=".";var h=c||new u;for(var g=e.g,k=e.j,f,l,m;a;){f=g.exec(a);if(null===f)throw 1;f=f[0].length;l=a.slice(0,f-1).replace(k,"$1");a=a.slice(f);(f=h.h[l])?m=f.c:(m=new u,f=new v(h,l,m),h.h[l]=f);h=m}if(!f)throw 1;a=f;a.f=b;E(e,d,c)};}();
+#%#var AG_abortOnPropertyWrite=function(a,b){var c=Math.random().toString(36).substr(2,8);AG_defineProperty(a,{beforeSet:function(){b&&console.warn("AdGuard aborted property write: "+a);throw new ReferenceError(c);}});var d=window.onerror;window.onerror=function(e){if("string"===typeof e&&-1!==e.indexOf(c))return b&&console.warn("AdGuard has caught window.onerror: "+a),!0;if(d instanceof Function)return d.apply(this,arguments)}};
+#%#var AG_abortOnPropertyRead=function(a,b){var c=Math.random().toString(36).substr(2,8);AG_defineProperty(a,{beforeGet:function(){b&&console.warn("AdGuard aborted property read: "+a);throw new ReferenceError(c);}});var d=window.onerror;window.onerror=function(e){if("string"===typeof e&&-1!==e.indexOf(c))return b&&console.warn("AdGuard has caught window.onerror: "+a),!0;if(d instanceof Function)return d.apply(this,arguments)}};
+#%#var AG_abortInlineScript=function(g,b,c){var d=function(){if("currentScript"in document)return document.currentScript;var a=document.getElementsByTagName("script");return a[a.length-1]},e=Math.random().toString(36).substr(2,8),h=d();AG_defineProperty(b,{beforeGet:function(){var a=d();if(a instanceof HTMLScriptElement&&a!==h&&""===a.src&&g.test(a.textContent))throw c&&console.warn("AdGuard aborted execution of an inline script"),new ReferenceError(e);}});var f=window.onerror;window.onerror=function(a){if("string"===typeof a&&-1!==a.indexOf(e))return c&&console.warn("AdGuard has caught window.onerror: "+b),!0;if(f instanceof Function)return f.apply(this,arguments)}};
+#%#var AG_setConstant=function(e,a){if("undefined"===a)a=void 0;else if("false"===a)a=!1;else if("true"===a)a=!0;else if("noopFunc"===a)a=function(){};else if("trueFunc"===a)a=function(){return!0};else if("falseFunc"===a)a=function(){return!1};else if(/^\d+$/.test(a)){if(a=parseFloat(a),isNaN(a)||32767<Math.abs(a))return}else return;var b=!1;AG_defineProperty(e,{get:function(){return a},set:function(c){if(b)var d=!0;else void 0!==c&&void 0!==a&&typeof c!==typeof a&&(b=!0),d=b;d&&(a=c)}})};
+
+!---------------------------------------------!
+!----- Global Ad Objects Neutralization -----!
+!---------------------------------------------!
+! Neutralize Google Ads
+#%#AG_setConstant('googletag.cmd', 'noopFunc');
+#%#AG_setConstant('googletag.pubads', 'noopFunc');
+#%#AG_setConstant('googletag.defineSlot', 'noopFunc');
+#%#AG_setConstant('googletag.display', 'noopFunc');
+#%#AG_setConstant('googletag.enableServices', 'noopFunc');
+
+! Neutralize Naver Ads (GLADSDK)
+#%#AG_setConstant('gladsdk.cmd', 'noopFunc');
+#%#AG_setConstant('gladsdk.defineAdSlot', 'noopFunc');
+#%#AG_setConstant('gladsdk.display', 'noopFunc');
+#%#AG_setConstant('glad.cmd', 'noopFunc');
+
+! Neutralize AdSense
+#%#AG_setConstant('adsbygoogle', 'noopFunc');
+#%#AG_setConstant('adsbygoogle.push', 'noopFunc');
+
+! Neutralize Korean Ad Networks
+#%#AG_setConstant('adfit', 'noopFunc');
+#%#AG_setConstant('kakao_ad', 'noopFunc');
+#%#AG_setConstant('criteo_q', 'noopFunc');
+#%#AG_setConstant('TossPixel', 'noopFunc');
+#%#AG_setConstant('Mobon', 'noopFunc');
+#%#AG_setConstant('dable', 'noopFunc');
+#%#AG_setConstant('Buzzvil', 'noopFunc');
+
+! Neutralize Anti-Adblock Scripts
+#%#AG_setConstant('FuckAdBlock', 'noopFunc');
+#%#AG_setConstant('BlockAdBlock', 'noopFunc');
+#%#AG_setConstant('SniffAdBlock', 'noopFunc');
+#%#AG_setConstant('fuckAdBlock', 'noopFunc');
+#%#AG_setConstant('blockAdBlock', 'noopFunc');
+#%#AG_setConstant('sniffAdBlock', 'noopFunc');
+#%#AG_setConstant('canRunAds', 'trueFunc');
+#%#AG_setConstant('isAdBlockActive', 'falseFunc');
+#%#AG_setConstant('adBlockEnabled', 'false');
+#%#AG_setConstant('adBlockDetected', 'false');
+#%#AG_setConstant('adblock', 'false');
+#%#AG_setConstant('ads_not_blocked', 'true');
+
+!-------------------------------------------------------------!
+!----- Anti-Adblock Detection Scripts Blocker (CRITICAL) -----!
+!-------------------------------------------------------------!
+! Block FuckAdBlock and BlockAdBlock scripts
+/fuckadblock.js
+/blockadblock.js
+/anti-adblock.js
+/anti_adblock.js
+/antiAdblock.js
+/antiAdBlock.js
+/adblock-detect.js
+/adblock_detect.js
+/adblockdetect.js
+/adDetect.js
+/ad-detect.js
+/adblock-checker.js
+||*/fuckadblock.js$script
+||*/blockadblock.js$script
+||*/anti-adblock.js$script
+||*/adblock-detect*.js$script
+||*/bait.js$script
+
+!---------------------------------------------!
+!----- Dynamic Ad Script Injection Blocker -----!
+!---------------------------------------------!
+#%#var KR_blockDynamicAdScripts = function() { var originalCreateElement = document.createElement; document.createElement = function(tagName) { var element = originalCreateElement.call(document, tagName); if (tagName && tagName.toLowerCase() === 'script') { var originalSetAttribute = element.setAttribute; element.setAttribute = function(name, value) { if (name === 'src' && typeof value === 'string') { var adPatterns = ['adfit', 'adpost', 'adsense', 'googlesyndication', 'doubleclick', 'googletagmanager', 'gfp-core', 'mobon_script', 'ads.min.js', 'dablena', 'admixer', 'buzzvil-pixel', 'taboola', 'realclick', 'acecounter', 'cauly', 'clickmon', 'coupang.com/g.js', 'daangn.com/sdk', 'fuckadblock', 'blockadblock', 'anti-adblock', 'adblock-detect', 'bait.js']; for (var i = 0; i < adPatterns.length; i++) { if (value.indexOf(adPatterns[i]) !== -1) { return; } } } return originalSetAttribute.call(element, name, value); }; } return element; }; var originalWrite = document.write; document.write = function(content) { if (typeof content === 'string') { var blockPatterns = ['adsbygoogle', 'googlesyndication', 'doubleclick', 'adfit', 'mobon', 'dable']; for (var i = 0; i < blockPatterns.length; i++) { if (content.indexOf(blockPatterns[i]) !== -1) { return; } } } return originalWrite.call(document, content); }; };
+
+!---------------------------------------------!
+!----- Bait Ad Element Remover -----!
+!---------------------------------------------!
+#%#var KR_removeBaitAds = function() { AG_onLoad(function() { var baitSelectors = ['#ad-bait', '#bait-ad', '.ad-bait', '.bait-ad', '[id*="bait"]', '[class*="bait"]', '#ad_script', '.ad_script', '#sponsored-ads', '.sponsored-ads']; var removeBait = function() { baitSelectors.forEach(function(selector) { try { AG_each(selector, function(elem) { if (elem && elem.parentNode) { elem.parentNode.removeChild(elem); } }); } catch(e) {} }); }; removeBait(); setInterval(removeBait, 1000); }); };
+
+!---------------------------------------------!
+!----- Shadow DOM Ad Blocker -----!
+!---------------------------------------------!
+#%#var KR_shadowDomBlocker = function() { AG_onLoad(function() { var observer = new MutationObserver(function(mutations) { mutations.forEach(function(mutation) { if (mutation.addedNodes) { mutation.addedNodes.forEach(function(node) { if (node.nodeType === 1 && node.shadowRoot) { try { var shadowAds = node.shadowRoot.querySelectorAll('[class*="ad"], [id*="ad"], [class*="banner"], iframe'); shadowAds.forEach(function(ad) { if (ad.parentNode) ad.parentNode.removeChild(ad); }); } catch(e) {} } }); } }); }); if (document.body) { observer.observe(document.body, { childList: true, subtree: true }); } }); };
+
+!---------------------------------------------!
+!----- Advanced Korean Ad Remover -----!
+!---------------------------------------------!
+#%#var KR_advancedAdRemover = function() { AG_onLoad(function() { var adSelectors = ['ins.kakao_ad_area', 'ins.adsbygoogle', 'ins[data-ad-unit]', 'ins[data-ad-slot]', 'div[id*="google_ads"]', 'div[class*="google_ads"]', 'div[data-ad-unit]', 'div[data-ad-slot]', 'iframe[src*="googleads"]', 'iframe[src*="doubleclick"]', 'iframe[src*="adfit"]', 'iframe[src*="mobon"]', 'iframe[src*="dable"]', 'iframe[src*="taboola"]', 'iframe[src*="criteo"]', 'iframe[src*="coupang"]', '[class*="ad-container"]', '[class*="ad_container"]', '[id*="ad-container"]', '[id*="ad_container"]', '.revenue_unit_wrap', '.kakao_ad_area', '.adpost_wrap', '.adpost_box']; var removeWithContainer = function(elem) { if (!elem || !elem.parentNode) return; var parent = elem.parentNode; parent.removeChild(elem); if (parent && parent.children.length === 0 && parent.parentNode) { if (/ad|banner|promo|sponsor/i.test(parent.className) || /ad|banner|promo|sponsor/i.test(parent.id)) { parent.parentNode.removeChild(parent); } } }; adSelectors.forEach(function(selector) { AG_each(selector, removeWithContainer); }); setInterval(function() { adSelectors.forEach(function(selector) { AG_each(selector, removeWithContainer); }); }, 1000); }); };
+
+!---------------------------------------------!
+!----- MutationObserver Ad Blocker -----!
+!---------------------------------------------!
+#%#var KR_observerAdBlocker = function() { AG_onLoad(function() { if (!window.MutationObserver) return; var observer = new MutationObserver(function(mutations) { mutations.forEach(function(mutation) { if (mutation.addedNodes) { mutation.addedNodes.forEach(function(node) { if (node.nodeType === 1) { var isAd = false; var tagName = node.tagName ? node.tagName.toLowerCase() : ''; if (tagName === 'ins' && node.className) { isAd = /adsbygoogle|kakao_ad/i.test(node.className); } if (tagName === 'iframe' && node.src) { isAd = /googleads|doubleclick|adfit|mobon|dable|taboola|criteo/i.test(node.src); } if (!isAd && node.className && typeof node.className === 'string') { isAd = /ad[-_]|banner|adfit|adpost|revenue_unit/i.test(node.className); } if (!isAd && node.id && typeof node.id === 'string') { isAd = /ad[-_]|banner|adfit|adpost|bait/i.test(node.id); } if (isAd && node.parentNode) { node.parentNode.removeChild(node); } } }); } }); }); if (document.body) { observer.observe(document.body, { childList: true, subtree: true }); } }); };
+
+!---------------------------------------------!
+!----- Initialize All Blockers -----!
+!---------------------------------------------!
+#%#AG_onLoad(function() { try { KR_blockDynamicAdScripts(); KR_removeBaitAds(); KR_shadowDomBlocker(); KR_advancedAdRemover(); KR_observerAdBlocker(); } catch(e) {} });
+
+! JS API FINISH
+
+!-------------------------------!
+!----- Twitter Faster DNS -----!
+!-------------------------------!
+! 104.76.97.12 pbs.twimg.com
+! 104.76.97.13 video.twimg.com
+
+!----------------------------!
+!----- Twitch P2P Block -----!
+!----------------------------!
+||backend.dna-delivery.com$all,domain=twitch.tv
+||static.twitchcdn.net/assets/streamroot.streamrooter-*.js$script,domain=www.twitch.tv
+twitch.tv#%#//scriptlet("nowebrtc")
+twitch.tv##+js(nowebrtc)
+
+!-------------------------------!
+!----- Tracking Protection -----!
+!-------------------------------!
+||analytics.ad.daum.net^
+||analytics.twitter.com^$third-party
+||cdn.api.twitter.com/*/urls/count.json$third-party
+||twitter.com/i/jot
+
+!--------------------------------------------------!
+!----- Critical Ad Trigger Scripts Blocking -----!
+!--------------------------------------------------!
+! Google Ads - GTM & Doubleclick
+||www.googletagmanager.com/gtag/js$script,important
+||googleads.g.doubleclick.net^$important
+||pagead2.googlesyndication.com^$important
+||partner.googleadservices.com^
+||adservice.google.co.kr^
+||adservice.google.com^
+||adservice.google.com.tw^
+||adservice.google.tw^
+||pagead2.googleadservices.com^
+||doubleclick.net^
+||google-analytics.com^
+||googletagservices.com^
+||partnerssl.googleadservices.com^
+||googletagmanager.com^
+||www-googletagmanager.l.google.com^
+
+! Naver Ads - GFP Core
+||ssl.pstatic.net/tveta/libs/glad/prod/gfp-core.js$script,important
+||adpost.naver.com^
+||ad.naver.com^
+||gfp.naver.com^$important
+||nads.naver.com^
+||adsvc.naver.com^
+||ad.search.naver.com^
+||ad-clix.naver.com^
+||adc.naver.com^
+||adcreative.naver.com^
+||bb.ad.naver.com^
+||ia.www.naver.com^
+||l.m.naver.com^
+||saedu.naver.com^
+||syndication.openapi.naver.com^
+||veta.naver.com^
+||veta.naver.com.nheos.com^
+||wrd.naver.com^
+||adcr.naver.com^
+||adcr.naver.com.nheos.com^
+||external.impression-neo.naver.com^
+||wcs.naver.net^
+||ad.nbms.naver.com^
+||ad.news.naver.com^
+||creative.nbms.naver.com^
+||castbox.shopping.naver.com^
+||tvetamovie.pstatic.net^
+||searchad-phinf.pstatic.net^
+||golda.cafe.naver.com^
+||campaign.nbilly.naver.com^
+||ni.naver.com^
+||camp-api.naver.com^
+||camp-report.naver.com^
+||bff.cafe.naver.com^
+||nlog.naver.com^
+||route-like.naver.com^
+||scv-cafe.io.naver.com^
+||ipada.cafe.naver.com^
+||naverpa-phinf.pstatic.net^
+||ad-api.band.us^
+||ad.nmv.naver.com^
+||ams.rmcnmv.naver.com^
+||cpv.ad.naver.com^
+||damoive.dn.naver.com^
+||videost.nmv.naver.com^
+||vts.rmcnmv.naver.com^
+||lcs.naver.com^
+||ads.moot.us^
+||ads.moot.us.nheos.com^
+||naverwebtoon-phinf.pstatic.net^
+
+! Kakao Adfit
+||t1.kakaocdn.net/adfit/static/ad.js$script,important
+||adfit.kakao.com^$important
+||ads.kakao.com^
+||t1.daumcdn.net/adfit/*$important
+||*.adfit.co.kr^
+||ad.kakao.com^
+||track.adfit.kakao.com^
+||moment.kakao.com^
+||track.moment.kakao.com^
+||ad-sdk.kakao.com^
+||adview.kakao.com^
+||ad-content.moment.kakao.com^
+||ad-content.*.kakao.com^
+||kyson.ad.daum.net^
+||display.ad.daum.net^
+||webid.ad.daum.net^
+||ad.daum.net^
+||adclix.daum.net^
+||adclixad.daum.net^
+||adserver.*.kakao.com^
+||amsimg.daum-img.net^
+||amsv2.daum.net^
+||kyson.kakao.com^
+||kyson-uvlzgydu.kgslb.com^
+||talktips.kakao.com^
+||more-api.kakao.com^
+||iopen.gl.kakaocdn.net^
+||chat-openlink-79wjmlwr.kgns1.com^
+||chat-openlink.kakao.com^
+||openlink.kakao.com^
+||aem-ingest-3hlnczlq.kgslb.com^
+||bc-ds-0f1uqsuh.kgslb.com^
+||aem-ingest.onkakao.net^
+||bc.ds.kakao.com^
+||d3f-poi-7j3t97vo.kgslb.com^
+||d3f-poi.kakao.com^
+||acid-api.ds.kakao.com^
+||launches.appsflyer.com^
+||ik.kakaocdn.net^
+||shopper-api.kakao.com^
+||shopper-api-e3oes9by.kgslb.com^
+||taxi.kakaocdn.net^
+||taxi.gl.kakaocdn.net^
+||talkchannel-log.kakao.com^
+||tg.kakao.com^
+||stat.tiara.kakao.com^
+||stat.tiara.daum.net^
+||stat.tiara.g.daum.net^
+||track.tiara.kakao.com^
+||track.tiara.daum.net^
+||adserver.rockwell.kakao.com^
+||mud-kage.kakao.co.kr^
+||aem-collector.daumkakao.io^
+||aem-collector-prod-ytlsojie.kgslb.com^
+
+! Mobon
+||s.p.enliple.com/mweb/js/mobon_script.js$script,important
+||mobon.net^$important
+||ad.mobon.net^
+||nclick.mobon.net^
+||www.mobon.net^
+||track.mobon.net^
+||img.mobon.net^
+||*.mobon.net^$third-party
+
+! Cauly
+||image.cauly.co.kr/websdk/common/lasted/ads.min.js$script,important
+||image.cauly.co.kr^$important
+||ad.cauly.co.kr^
+
+! Daangn (당근광고)
+||pixel.daangn.com/sdk.js$script,important
+||pixel.daangn.com^$important
+||ads.daangn.com^
+
+! ClickMon
+||ads.clickmon.co.kr/wm_js/wm.js$script,important
+||clickmon.co.kr^$important
+||ad.clickmon.co.kr^
+||banner.clickmon.co.kr^
+||track.clickmon.co.kr^
+||click.clickmon.co.kr^
+||*.clickmon.co.kr^
+
+! Dable
+||static.dable.io/dist/dablena.min.js$script,important
+||dable.io^$important
+||api.dable.io^
+||static.dable.io^
+||images.dable.io^
+||widget.dable.io^
+||logger.dable.io^
+||*.dable.io^$third-party
+
+! Coupang Partners
+||ads-partners.coupang.com/g.js$script,important
+||ads-partners.coupang.com^$important
+||ads.coupang.com^
+||tr.coupang.com^
+||image.coupang.com/*/advertisements/*
+||static.coupang.com/*/ads/*
+||static.coupangcdn.com/ga/cmg_paperboy/image/*/$image
+||weblog.coupang.com^$important
+
+! Admixer
+||scr.nsmartad.com/admixer/v3/admixer.js$script,important
+||scr.nsmartad.com^$important
+||admixer.co.kr^
+
+! Buzzvil
+||buzz-js.buzzvil.com/buzzvil-pixel-sdk/buzzvil-pixel.js$script,important
+||buzz-js.buzzvil.com^$important
+||buzzvil.com^*/ad/*
+||*.buzzvil.com^$app
+||*.buzzvil.com^$third-party
+
+! Taboola
+||cdn.taboola.com/libtrc/*$script,important
+||taboola.com^$important
+||trc.taboola.com^
+||cdn.taboola.com^
+||api.taboola.com^
+||images.taboola.com^
+||nr.taboola.com^
+||*.taboola.com^$third-party
+
+! RealClick
+||hcms.realclick.co.kr/js/realclick.js$script,important
+||hcms.realclick.co.kr^$important
+||realclick.co.kr^
+
+! AceCounter
+||gtm.acecounter.com^$important
+||acecounter.com^
+
+! Criteo
+||criteo.com^$important
+||criteo.net^
+||static.criteo.net^
+||dis.criteo.com^
+||gum.criteo.com^
+||cas.criteo.com^
+||widget.criteo.com^
+||bidder.criteo.com^
+||*.criteo.com^$third-party
+||ads.as.criteo.com^
+
+! Toss Ads
+||trillion.toss.im^$important
+
+! Pixiv
+||ad2.fivecdm.com^
+||bc2.fivecdm.com^
+||pixon.ads-pixiv.net^
+||imp.pixiv.net^
+
+! Additional Korean Ad Networks
+||targetinggates.com^
+||ad.targetinggates.com^
+||cdn.targetinggates.com^
+||track.targetinggates.com^
+||*.targetinggates.com^$third-party
+||tenping.kr^
+||tenping.net^
+||api.tenping.kr^
+||cdn.tenping.kr^
+||track.tenping.kr^
+||ad.tenping.kr^
+||adpopcorn.com^
+||api.adpopcorn.com^
+||image.adpopcorn.com^
+||ad.adpopcorn.com^
+||track.adpopcorn.com^
+||log.adpopcorn.com^
+||*.adpopcorn.com^$third-party
+||adison.co^
+||api.adison.co^
+||cdn.adison.co^
+||track.adison.co^
+||acrosspf.com^
+||adn.acrosspf.com^
+||ad.acrosspf.com^
+||track.acrosspf.com^
+||*.acrosspf.com^$third-party
+||adpick.co.kr^
+||adpick.kr^
+||bizspring.co.kr^*/ad/*
+||ideakey.co.kr^*/ad/*
+||mediagobiz.com^
+||realssp.co.kr^
+||adnmore.co.kr^
+||enliple.com^
+||nasmedia.co.kr^*/ad/*
+||igaworks.com^*/ad/*
+||popin.cc^
+||adv.imaderp.co.kr^
+||g-plug.pstatic.net^
+||ablibr.com^
+||ad.naoncoms.co.kr^
+||gwk.adlibr.com^
+||gwx.adlibr.com^
+||ad-exchange.toast.com^
+||adlc-exchange.toast.com^
+||www.ad.appyoun.com^
+||ad-img.ebaykorea.com^
+||ad.adnmore.co.kr^
+||adapi.about.co.kr^
+||advimg.ad-mapps.com^
+||ads.mopub.com^
+||2mdn.net^
+||trvdp.com^
+||mktp.tmoney.co.kr^
+
+! Mobile Ad Networks
+||admob.com^$app
+||applovin.com^$app
+||unity3d.com/*/ads/*$app
+||vungle.com^$app
+||chartboost.com^$app
+
+! General Ad Patterns
+/ad-banner-*.js
+/ad-service-*.js
+/ad-track-*.js
+/advertisement-*.js
+||*/ads.js$domain=~google.com
+||*/adservice.js
+||*/adnetwork.js
+||*/adview.js
+||*/adclick.js
+||*/adtracker.js
+
+!---------------------------!
+!----- Allowed Domains -----!
+!---------------------------!
+@@||res-creatives.maio.jp$important
+@@||media-api.maio.jp$important
+@@||ssl.pstatic.net/adimg3.search/adpost/js/adpost_show_ads_v2.min.js$script,domain=search.danawa.com|m.danawa.com|m.clien.net
+@@||dcinside.co.kr/viewmovie.php^$stealth
+@@||dcinside.co.kr/viewimage.php^$stealth
+@@||cargo.koreanair.com^$important
+@@||tivan.naver.com^$important
+@@||www.googletagmanager.com^$important,domain=skt0.co.kr
+@@||www-googletagmanager.l.google.com^$important,domain=skt0.co.kr
+@@||mktp.tmoney.co.kr^$important,app=com.samsung.android.spay
+@@||adcr.naver.com^$important,domain=search.naver.com
+@@||mobile.launchdarkly.com^$important,app=com.samsung.android.oneconnect
+@@||ap.www.namecheap.com^$important,document
+@@||wurfl.io/wurfl.js$important,domain=todomate.net
+@@||t.co^$important
+@@||metrics.icloud.com^$important
+@@||securemetrics.apple.com^$important
+@@||supportmetrics.apple.com^$important
+@@||iadsdk.apple.com^$important
+@@||ca.iadsdk.apple.com^$important
+@@||cf.iadsdk.apple.com^$important
+@@||tr.iadsdk.apple.com^$important
+@@||news.iadsdk.apple.com^$important
+
+!---------------------------!
+!----- Blocked Domains -----!
+!---------------------------!
+! [ censys.io / censys-scanner.com ]
+/scanner-([0-9]+).ch([0-9]+).censys-scanner.com/
+/(162\.142\.125\.(?:[0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]))/$network
+/(167\.94\.138\.(?:[0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]))/$network
+/(167\.94\.145\.(?:[0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]))/$network
+/(167\.94\.146\.(?:[0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]))/$network
+/(167\.248\.133\.(?:[0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]))/$network
+/\[(2602\:080d\:1000\:b0cc\:000e\:[a-f0-9]{4}\:[a-f0-9]{4}\:[a-f0-9]{4})\]/$network
+/\[(2620\:0096\:e000\:b0cc\:000e\:[a-f0-9]{4}\:[a-f0-9]{4}\:[a-f0-9]{4})\]/$network
+
+! [ mailscanner.info ]
+||phishing.mailscanner.info^
+
+!-------------------------------!
+!----- Site Element Hiding -----!
+!-------------------------------!
+
+! ===== Universal Ad Containers =====
+##ins.kakao_ad_area
+##ins.adsbygoogle
+##ins[data-ad-unit]
+##ins[data-ad-slot]
+##ins[class*="ad_"]
+##div[id*="google_ads"]
+##div[class*="google_ads"]
+##div[data-ad-unit]
+##div[data-ad-slot]
+##iframe[src*="googleads"]
+##iframe[src*="doubleclick"]
+##iframe[src*="adfit"]
+##iframe[src*="mobon"]
+##iframe[src*="dable"]
+##iframe[src*="taboola"]
+##iframe[src*="criteo"]
+##iframe[src*="coupang"]
+##iframe[src*="server.cpmstar.com"]
+
+! ===== Tistory =====
+tistory.com##.adfit.revenue_unit_item
+tistory.com##.kakao_ad_area
+tistory.com##.revenue_unit_wrap
+tistory.com##.tt_ad
+tistory.com##[class*="adfit"]
+tistory.com##[id*="adfit"]
+tistory.com##[class*="kakao_ad"]
+tistory.com##div[id^="kakao_ad_"]
+tistory.com##div[class^="adfit"]
+tistory.com##ins.adsbygoogle
+tistory.com#%#AG_onLoad(function() { AG_removeElementBySelector('.revenue_unit_wrap'); AG_removeElementBySelector('.kakao_ad_area'); AG_removeElementBySelector('ins.adsbygoogle'); setInterval(function(){ AG_each('ins.kakao_ad_area', function(e){ if(e&&e.parentNode) e.parentNode.removeChild(e); }); AG_each('ins.adsbygoogle', function(e){ if(e&&e.parentNode) e.parentNode.removeChild(e); }); }, 500); });
+
+! ===== Naver Blog =====
+blog.naver.com##.adpost_wrap
+blog.naver.com##.adpost_box
+blog.naver.com##[class*="adpost"]
+blog.naver.com##[id*="adpost"]
+blog.naver.com##div[class*="ad_"]
+m.blog.naver.com###POST_VIEW_BOTTOM_WEB
+m.blog.naver.com###ssp-adda
+m.blog.naver.com###ssp-adcontent
+m.blog.naver.com###ssp-adpost
+m.blog.naver.com##[class*="adpost"]
+m.blog.naver.com#%#AG_onLoad(function() { var removeAds = function() { AG_removeElementById('ssp-adda'); AG_removeElementById('ssp-adcontent'); AG_removeElementById('ssp-adpost'); AG_removeElementById('POST_VIEW_BOTTOM_WEB'); AG_each('[class*="adpost"]', function(e){ if(e&&e.parentNode) e.parentNode.removeChild(e); }); }; removeAds(); setInterval(removeAds, 500); });
+
+! ===== Naver Main & Search =====
+www.naver.com###NM_TOP_BANNER
+www.naver.com###veta_branding
+www.naver.com##.ad_area
+www.naver.com##[class*="ad_"]
+m.naver.com###HOME_AD
+m.naver.com###nmap_news_feed_top
+m.naver.com###nmap_news_channel_top
+m.naver.com###nmap_sports_top
+m.naver.com###nmap_ent_top
+m.naver.com##[id*="_MM_WRAP_"]
+m.naver.com##.ad_light_mode
+m.naver.com###MM_HOME_PROMOTION
+search.naver.com##.ad_section
+search.naver.com##[class*="ad_"]
+search.naver.com###main_pack > div.ad_section
+m.search.naver.com##.ad_light_mode
+m.search.naver.com#%#AG_onLoad(function() { AG_each('[id*="_MM_WRAP_"]', function(e) { if(e&&e.parentNode) e.parentNode.removeChild(e); }); AG_removeElementById('HOME_AD'); AG_removeElementById('MM_HOME_PROMOTION'); });
+
+! ===== Naver Cafe =====
+cafe.naver.com##.ad_area
+cafe.naver.com##[class*="ad_"]
+cafe.naver.com##[id*="ad_"]
+section.cafe.naver.com###mainContainer > div.section_home_content.content:nth-child(2) > div.section_home_banner:nth-child(2)
+m.cafe.naver.com##.home_section_promotion
+m.cafe.naver.com##.CafeAppBanner
+m.cafe.naver.com#%#AG_onLoad(function() { AG_removeElementBySelector('.CafeAppBanner'); AG_removeElementBySelector('.home_section_promotion'); });
+
+! ===== Naver Webtoon =====
+m.comic.naver.com###ct > div.section_list_toon:last-child > ul.list_toon:last-child > li.item.banner
+
+! ===== Naver News =====
+news.naver.com##div.comp_news_ad
+n.news.naver.com###_MODAL_LAYER_FOR_UNSUBSCRIBER_PROMOTION
+
+! ===== Naver Band =====
+band.us##div:first-child > div.listKeepingRegion._mainLayoutListKeepingRegion.-show:nth-child(5) > div > section.modalLayerView._iOSMin100vh.bandAppBannerActive > div.wrap > div.container._contentsRegion:last-child > div.globalHomeSection > div.bandAppBanner.-active:first-child
+
+! ===== Daum =====
+daum.net##.content_ad
+daum.net##[class*="ad_"]
+search.daum.net##.log_wide.adLinkColl
+search.daum.net##[class*="ad"]
+
+! ===== DCInside =====
+dcinside.com###ad-layer
+dcinside.com##.ad_top
+dcinside.com##.leftbanner
+dcinside.com##.rightbanner
+dcinside.com##.banner_box
+dcid.dcinside.com##div.ban_box
+gall.dcinside.com##.ad_bottom_list
+gall.dcinside.com##.power_click
+gall.dcinside.com##.kakao_ad_area
+gall.dcinside.com###admaru
+gall.dcinside.com##._BTN_AD_
+gall.dcinside.com##[class*="ad_"]
+gall.dcinside.com###zzbang_div
+gall.dcinside.com###wif_adx_banner_wrap
+m.dcinside.com##.adv-group
+m.dcinside.com##.adv-groupin
+m.dcinside.com##.adv-groupno
+m.dcinside.com##.adv-grouptop
+m.dcinside.com##[class*="adv-"]
+m.dcinside.com##div#adbay_floatingid
+m.dcinside.com#%#AG_onLoad(function() { AG_each('[class*="adv-"]', function(e) { if(e&&e.parentNode) e.parentNode.removeChild(e); }); AG_removeElementById('adbay_floatingid'); });
+dcinside.com#?#table.gall_list > tbody > .ub-content:has(> td.gall_num:contains(AD))
+
+! ===== Fmkorea =====
+fmkorea.com###adpost
+fmkorea.com##div#banner3
+fmkorea.com##iframe[src*="loader.php"]
+fmkorea.com##iframe[src*="_adpage/"]
+m.fmkorea.com##.adpost
+m.fmkorea.com##div[class^="fm_google_a"]
+m.fmkorea.com#%#AG_onLoad(function() { AG_removeElementById('adpost'); AG_removeElementById('banner3'); });
+
+! ===== Clien =====
+clien.net##div#hongboInfoList
+clien.net##div#naverAd
+clien.net##div.ad_fix
+clien.net##div.footer_ad
+clien.net##div[class*="_ad"]
+m.clien.net##div#comment_naverAd
+m.clien.net##div#naverAd2
+m.clien.net##div.list_bottom_ad
+m.clien.net#%#AG_onLoad(function() { AG_removeElementById('naverAd'); AG_removeElementById('comment_naverAd'); AG_removeElementById('naverAd2'); AG_removeElementById('hongboInfoList'); });
+
+! ===== Meeco =====
+meeco.kr##div[style*="absolute"]:not([class]):not([id])
+meeco.kr##div.ad_fix
+meeco.kr#$#[style*="opacity"] { opacity: 1 !important; }
+meeco.kr#$#.xe_content { opacity: 1 !important; }
+meeco.kr#%#AG_onLoad(function() { AG_abortInlineScript(/zfgloadedpopup|zfgloadedpushopt/, 'String.fromCharCode'); });
+meeco.kr##+js(acis, $, .adsbygoogle)
+
+! ===== EveryTime =====
+everytime.kr###container > div.banners
+everytime.kr##div.card
+everytime.kr###sheet
+everytime.kr##[class*="ad"]
+
+! ===== QuasarZone =====
+quasarzone.com###container > aside.logo-area.left:first-child
+quasarzone.com###container > aside.logo-area.right:last-child
+
+! ===== svrforum =====
+svrforum.com###xt_sticker_wrap
+
+! ===== AfreecaTV =====
+afreecatv.com##.adballoon
+afreecatv.com##.adshop_layer
+afreecatv.com##[class*="ad"]
+bj.afreecatv.com##.bs-notice_layer
+vod.afreecatv.com##.adballoon
+play.afreecatv.com##.bg_dark
+
+! ===== Coupang =====
+coupang.com###coupang-banner
+coupang.com###fullBanner
+coupang.com###prodStickyBanner
+coupang.com###sdp-bottom-banner
+coupang.com###sdp-mid-banner
+coupang.com###app-redirect-nudge
+coupang.com##.ads-line-banner-container
+coupang.com##.ads-impression
+coupang.com##.promotion-banner
+coupang.com##.srp-top-banner-container
+coupang.com##[class*="banner"]
+coupang.com##[class*="ad"]
+
+! ===== Danawa =====
+danawa.com###main-middlebnr
+danawa.com###main-rightbnr
+danawa.com##div.main-clip.main__inner
+danawa.com##div.main-footer__right
+danawa.com##div.main__grid__right
+danawa.com##[class*="banner"]
+search.danawa.com###shoppingPlanArea
+m.danawa.com##[id*="banner"]
+m.danawa.com##[id*="recommend"]
+m.danawa.com##[id*="-container"]
+m.danawa.com#%#AG_onLoad(function() { AG_each('[id*="banner"]', function(e) { if(e&&e.parentNode) e.parentNode.removeChild(e); }); });
+prod.danawa.com###mainAdStar
+prod.danawa.com###mainAdReader
+prod.danawa.com###mainAdPoint
+prod.danawa.com###floatAdLayer
+prod.danawa.com###powerLink_new_product
+prod.danawa.com###adTypeE_Original
+prod.danawa.com##li.prod_ad_item
+prod.danawa.com##div.ad_wide_slide
+
+! ===== Shopping Sites =====
+! Gmarket
+mobile.gmarket.co.kr###srpSponsorLinkList
+
+! Auction
+auction.co.kr###BAC_AD_ZONE20
+auction.co.kr##.module_slot.promo
+browse.auction.co.kr###section--inner_content_body_container > div.section--module_wrap:last-child > div.component.component--sponsor_link
+
+! TMON
+tmon.co.kr##.banner
+tmon.co.kr##.banner_div
+
+! WEMAKEPRICE
+wemakeprice.com##.mix_global_banner
+wemakeprice.com###_cardBanner
+
+! Qoo10
+qoo10.com##.shr_rwrditm
+qoo10.com##.m_ad_bnnr
+
+! emart
+emart.ssg.com###sky_banner_tab
+
+! ===== Twitter/X =====
+twitter.com##.twitter-ad
+twitter.com##.promoted-tweet
+twitter.com##.promoted-account
+twitter.com##.promoted-trend
+twitter.com##[data-testid="placementTracking"]
+twitter.com#?#div[data-testid="UserCell"]:-abp-contains(/Promoted|Gesponsert|Promocionado|Sponsorisé|Sponsorizzato|Promowane|Promovido|Реклама|Uitgelicht|Sponsorlu|Mainostettu|推廣|推广|프로모션 중|プロモーション/)
+twitter.com#?#div[data-testid="trend"]:-abp-contains(/Promoted|Gesponsert|Promocionado|Sponsorisé|Sponsorizzato|Promowane|Promovido|Реклама|Uitgelicht|sponsorluğunda|Mainostettu|推廣|推广|프로모션 중|プロモーション/)
+mobile.twitter.com#?#.tweet:-abp-has(.promo)
+
+! ===== pixiv =====
+pixiv.net###header-banner
+pixiv.net##.ad-footer
+pixiv.net##[class*="ad-"]
+pixiv.net###wrapper > div.ad-footer
+
+! ===== Pawoo =====
+pawoo.net###mastodon > div > div.ui > div.columns-area__panels:first-child > div.columns-area__panels__main:nth-child(2) > div:last-child > div.react-swipeable-view-container > div:first-child > div.columns-area.columns-area--mobile > div.column > div.pawoo-kyoa-home:last-child
+
+! ===== Namuwiki =====
+namu.wiki##div.ad
+namu.wiki##iframe[src*="arca.live/static/ad/"]
+namu.wiki##iframe[src*="arca.live/external/callad"]
+namu.wiki#?#div:matches-attr("/data-v-/"):has(> div > div > div > div:matches-attr("/data-v-/"):matches-css(justify-content: space-between) > img[src*="/w.namu.la/s/"]:nth-ancestor(4))
+namu.wiki#?#div[class]:matches-attr("/data-v-/") > div:matches-attr("/data-v-/"):not([class]):not(:has(> a[href^="/w/"]:matches-attr("/data-v-/"))):not(:has(> a:matches-attr("/data-v-/"))):not(:contains(/.{1,}/i))
+namu.wiki##article > h1 + p ~ div[id][class]
+namu.wiki#%#AG_onLoad(function() { AG_each('iframe[src*="arca.live"]', function(e) { if(e&&e.parentNode) e.parentNode.removeChild(e); }); });
+nanumnews.com##body>div:nth-of-type(2)>table:nth-of-type(2)>tbody>tr>td:nth-of-type(4)>table:nth-of-type(2)>tbody>tr>td>table:nth-of-type(2)
+
+! ===== etc =====
+good-postit.biz###main > div.container_wrap.container_wrap_first.main_color.sidebar_right:first-child > div.container.template-blog.template-single-blog > main.content.units.av-content-small.alpha.av-blog-meta-author-disabled.av-blog-meta-comments-disabled.av-blog-meta-html-info-disabled:first-child > div.code-block.code-block-7:nth-child(2) > div
+iphonedev.co.kr###h237
+apachezone.com###h237
+
+!----------------------------------------!
+!----- Adblock Warning Removal List -----!
+!----------------------------------------!
+###adblock_screen
+###adblock_message
+##.adblockInfo
+##.adblock_floating_message
+##.adblock_msg
+##.ads-block-warning
+##.deadblocker-header-bar
+##.detected-block-modal
+##.no-ad-reminder
+##.ad-blocker-warning
+##.main_adbalert
+##.pane-emediate
+###AdBlockDialog
+###aabl-container
+###abp-killer
+###adBlockAlert
+###adBlockAlertWrap
+###adBlockDetect
+###adBlockerModal
+###ad_blocker
+###adb-actived
+###adb-enabled
+###adb-enabled3
+###adb-warning
+###adbWarnContainer
+###adbcontainer-popup
+###adblock-alert
+###adblock-box
+###adblock-honeypot
+###adblock-modal
+###adblock-msg
+###adblock-notice
+###adblock-overlay
+###adblock-warning
+###adblockDetect
+###adblockWrap
+###adblock_detected
+###adblock_msg
+###adblock_tooltip
+###adblockerModal
+###adblocker_announce
+###adblocker_message
+###adblocker_modal_overlay
+###adblockinfo
+###adbpopup
+###ads-blocked
+###adsblocker_detected
+###advertisementjsalert
+###anti_adblock
+###box-adblocker-wrap
+###content_adblock_message
+###detection-block
+###detectadblock
+###fnAdblockingOverlay
+###fondAdblock
+###js-popup-blocker
+###mdp-deblocker-js-disabled
+###message_adblock
+###modal-adblocker
+###notify-adblock
+###tie-popup-adblock
+###wrapperBlocker
+##.AdblockBanner
+##.AdblockMessage
+##.BrokenAd
+##.ab-detected
+##.ad-alert-message-text
+##.ad-alert-wrapper
+##.ad-block-detected
+##.ad-block-enabled
+##.ad-block-message
+##.ad-blocked
+##.ad-blocker-warning
+##.ad_block_detected
+##.ad_blocker
+##.adBlockDetectModal
+##.adBlockWarning
+##.adblock-message
+##.adblock-modal
+##.adblock-notification-wrapper
+##.adblock-warning-partial-component
+##.adblocker-message
+##.adblocker-root
+##.ads-block-warning
+##.adsblocked
+##.counterAdblocks
+##.detectBlockBox
+##.fuckYouAdBlock
+##.kill-adblock-container
+##.msg-adblock
+##.noadblock
+##.remove-adblock-msg
+##.wp_adblock_detect
+/adblock-detect/*
+/adbDetect.
+/adbDetect/*
+/adblock_notify.js
+/adblocker-detected.
+/blockadblock.$script,xmlhttprequest
+
+! ===== End of filter list =====
