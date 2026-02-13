@@ -1,12 +1,13 @@
 [Adblock Plus 2.0]
-! Title: K_Filter - Korea ads filter
-! Description: K_Filter: 한국 광고업체들의 광고와 광고보드를 차단해 줍니다. 전부 차단 해주지는 못하므로 다른 필터들과 함께 이용해주세요.
+! Title: K-FILTER(Optimized)
+! Description: K-FILTER: 한국 광고업체들의 광고와 광고보드를 차단해 줍니다. 전부 차단 해주지는 못하므로 다른 필터들과 함께 이용해주세요. 해당 버전은 필수만 포함된 Optimized 버전입니다. 
+Base Filter: "https://cdn.jsdelivr.net/gh/neramc/neramc@master/block/filter_base.txt"
 ! Homepage: https://github.com/neramc/neramc
 ! Last modified: 2026-02-12
 ! Author: neramc
 ! Expires: 1 days
 ! License: MIT License
-! Version: 2.0.0
+! Version: 2.0.0 Optimized Edition
 
 !--------------------------!
 !----- General JS API -----!
