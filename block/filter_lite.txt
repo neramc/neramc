@@ -3,7 +3,7 @@
 ! Description: K-FILTER(Lite): K-Filter 의 가벼운 버전 입니다. 기본 광고들만 차단합니다. 
 ! Homepage: https://github.com/neramc/neramc
 ! Last modified: 2026-02-13
-! Expires: 1 days
+! Expires: 4 days
 ! License: https://github.com/neramc/neramc
 ! Version: 3.0.2 Lite Edition
 
