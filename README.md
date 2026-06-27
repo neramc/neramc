@@ -2,7 +2,7 @@
 
 # Hello world!
 
-<img width="1024" height="1024" alt="image" src="https://github.com/user-attachments/assets/ca3d5f43-ad92-4b1c-9c70-6f8982cd007f" />
+<img width="400" height="400" alt="image" src="https://github.com/user-attachments/assets/ca3d5f43-ad92-4b1c-9c70-6f8982cd007f" />
 
 **Welcome to my github!**
 
