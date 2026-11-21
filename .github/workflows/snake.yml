@@ -1,0 +1,39 @@
+# 기여 그래프를 먹는 뱀 애니메이션을 만들어 output 브랜치에 올립니다.
+# README의 "기여 기록" 섹션이 이 브랜치의 SVG를 불러옵니다.
+name: Contribution snake
+
+on:
+  schedule:
+    - cron: "23 15 * * *" # 매일 00:23 KST
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: snake
+  cancel-in-progress: true
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Generate snake SVGs
+        uses: Platane/snk/svg-only@v3
+        with:
+          github_user_name: ${{ github.repository_owner }}
+          outputs: |
+            dist/github-snake.svg?color_snake=#ff7a3d&color_dots=#ebe7e2,#cfc7c2,#a39a9e,#6e6468,#2e2629
+            dist/github-snake-dark.svg?palette=github-dark&color_snake=#ff7a3d&color_dots=#1f1a1c,#3b3337,#5a5155,#8a8186,#d8d1cc
+
+      - name: Publish to the output branch
+        uses: crazy-max/ghaction-github-pages@v4
+        with:
+          target_branch: output
+          build_dir: dist
+          commit_message: Update contribution snake
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
