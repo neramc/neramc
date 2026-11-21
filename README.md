@@ -20,14 +20,14 @@
 
 ### 장착 중 <sub>Active</sub>
 
-<a href="https://github.com/neramc/linuxhub"><img src="assets/cards/linuxhub.svg" width="49%" alt="Linuxhub — 리눅스 배포판 50여 개의 개요·설치 가이드와 공식 미러 다운로드. Astro · TypeScript · Bun"></a>
-<a href="https://github.com/neramc/app-deleter"><img src="assets/cards/app-deleter.svg" width="49%" alt="App Deleter — 남은 파일과 레지스트리까지 지우는 Windows 11 앱 삭제 도구. Rust · Slint · Win32, v2.0.0"></a>
+<a href="https://github.com/neramc/linuxhub"><img src="assets/cards/linuxhub.svg" width="410" alt="Linuxhub — 리눅스 배포판 50여 개의 개요·설치 가이드와 공식 미러 다운로드. Astro · TypeScript · Bun"></a>
+<a href="https://github.com/neramc/app-deleter"><img src="assets/cards/app-deleter.svg" width="410" alt="App Deleter — 남은 파일과 레지스트리까지 지우는 Windows 11 앱 삭제 도구. Rust · Slint · Win32, v2.0.0"></a>
 
 ### 보관함 <sub>Archived · 읽기 전용</sub>
 
-<a href="https://github.com/neramc/quill"><img src="assets/cards/quill.svg" width="49%" alt="Quill — Rust 엔진으로 동작하는 마크다운 IDE. Rust · Kotlin · Compose, v1.3.0"></a>
-<a href="https://github.com/neramc/markdown-old"><img src="assets/cards/markdown-studio.svg" width="49%" alt="Markdown Studio — 내장 브라우저 없이 미리보기를 그리는 마크다운 편집기. C# · .NET 10 · Avalonia, v2.3.1"></a>
-<a href="https://github.com/neramc/connection-verify"><img src="assets/cards/connection-verify.svg" width="49%" alt="Connection Verify — 마인크래프트 서버 접속마다 번호를 붙이고 리포트를 남기는 Paper 플러그인. Java, v2.1.3"></a>
+<a href="https://github.com/neramc/quill"><img src="assets/cards/quill.svg" width="410" alt="Quill — Rust 엔진으로 동작하는 마크다운 IDE. Rust · Kotlin · Compose, v1.3.0"></a>
+<a href="https://github.com/neramc/markdown-old"><img src="assets/cards/markdown-studio.svg" width="410" alt="Markdown Studio — 내장 브라우저 없이 미리보기를 그리는 마크다운 편집기. C# · .NET 10 · Avalonia, v2.3.1"></a>
+<a href="https://github.com/neramc/connection-verify"><img src="assets/cards/connection-verify.svg" width="410" alt="Connection Verify — 마인크래프트 서버 접속마다 번호를 붙이고 리포트를 남기는 Paper 플러그인. Java, v2.1.3"></a>
 
 ## 장비 <sub>Tech stack</sub>
 
