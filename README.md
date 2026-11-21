@@ -61,6 +61,10 @@
   <img src="https://raw.githubusercontent.com/neramc/neramc/output/github-snake.svg" width="100%" alt="기여 그래프의 칸을 하나씩 먹어 치우는 뱀 애니메이션">
 </picture>
 
+## 웹 포트폴리오 <sub>Web portfolio</sub>
+
+같은 픽셀아트 테마로 [Remix 3](https://remix.run)를 써서 만든 웹 포트폴리오가 [`portfolio/`](portfolio)에 있습니다. 직접 명령어를 입력할 수 있는 터미널도 들어 있어요.
+
 <div align="center">
   <img src="assets/footer.svg" width="100%" alt="Thanks for visiting! +1 XP">
 </div>
