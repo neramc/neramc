@@ -2,3 +2,8 @@ node_modules/
 db/*.sqlite
 tmp/
 .DS_Store
+
+# Build output: Vite client bundle + Nitro server, and the Vercel Build Output API
+.output/
+.vercel/
+dist/
