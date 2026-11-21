@@ -28,7 +28,9 @@ npm run typecheck
 
 Vercel 프로젝트의 **Root Directory는 `portfolio`** 로 두고, 빌드 명령은 기본값(`npm run build`)을
 사용합니다. 빌드가 `.vercel/output`을 만들므로 Vercel은 자체 프레임워크 빌드 대신 이 산출물을
-그대로 배포합니다.
+그대로 배포합니다. `vercel.json`의 `"framework": null`은 프로젝트의 Framework Preset이 `Node`
+(Vercel Backends)로 잡혀 있을 때 Vercel이 `server.ts` 엔트리를 찾는 대신 Build Output API를
+쓰도록 합니다.
 
 ## 구조
 
