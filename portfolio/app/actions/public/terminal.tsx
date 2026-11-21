@@ -11,6 +11,10 @@ import {
 const XP_KEY = 'neramc:xp'
 const MAX_ENTRIES = 60
 
+// The entry id is a public URL: Vite's client build maps `/assets/app/...` back
+// to the bundled chunk for this module (see `app/entry.client.ts`).
+const TERMINAL_ENTRY = '/assets/app/actions/public/terminal.tsx#Terminal'
+
 interface TerminalProps {
   data: TerminalData
   history: Entry[]
@@ -20,7 +24,7 @@ interface TerminalProps {
 
 // Server-rendered as a plain GET form; once hydrated, commands run in the
 // browser and only `open`/`github` leave the page.
-export const Terminal = clientEntry(import.meta.url, function Terminal(handle: Handle<TerminalProps>) {
+export const Terminal = clientEntry(TERMINAL_ENTRY, function Terminal(handle: Handle<TerminalProps>) {
   let history = handle.props.history
   let recalled: string[] = []
   let recallIndex = -1

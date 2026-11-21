@@ -2,16 +2,12 @@ import { redirect } from 'remix/response/redirect'
 import { createController } from 'remix/router'
 
 import { gear, profile, projects } from '../data/projects.ts'
-import { assets } from '../assets.ts'
 import { routes } from '../routes.ts'
 import { HomePage } from './home-page.tsx'
 import { introEntries, MAX_INPUT, runCommand, type TerminalData } from './public/terminal-commands.ts'
 
 export default createController(routes, {
   actions: {
-    async assets(context) {
-      return (await assets.fetch(context.request)) ?? new Response('Not Found', { status: 404 })
-    },
     home(context) {
       let data = terminalData()
       let history = introEntries()

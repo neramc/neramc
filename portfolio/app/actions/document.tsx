@@ -1,7 +1,6 @@
 import type { Handle, RemixNode } from 'remix/component'
-import { ImportMap } from 'remix/component/server'
 
-import { scriptEntry, stylesheetHref } from '../assets.ts'
+import { clientAssets } from '../client-assets.ts'
 
 export interface DocumentProps {
   children?: RemixNode
@@ -17,7 +16,7 @@ export function Document(handle: Handle<DocumentProps>) {
   return () => {
     let { children, head, title, description = DEFAULT_DESCRIPTION } = handle.props
     let fullTitle = title ? `${title} · ${SITE_NAME}` : `${SITE_NAME} — 웹 & 데스크톱 개발자`
-    let { href, importMap, preloads } = scriptEntry
+    let { entry, css } = clientAssets
 
     return (
       <html lang="ko">
@@ -33,13 +32,11 @@ export function Document(handle: Handle<DocumentProps>) {
           <meta property="og:type" content="website" />
           <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
           <title>{fullTitle}</title>
-          <link rel="stylesheet" href={stylesheetHref} />
-          {head}
-          <ImportMap value={importMap} />
-          {preloads.map((preloadHref) => (
-            <link key={preloadHref} rel="modulepreload" href={preloadHref} />
+          {css.map((file) => (
+            <link key={file.href} rel="stylesheet" href={file.href} />
           ))}
-          <script type="module" src={href}></script>
+          {head}
+          {entry ? <script type="module" src={entry}></script> : null}
         </head>
         <body>{children}</body>
       </html>
