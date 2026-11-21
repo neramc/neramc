@@ -59,6 +59,6 @@ Windows 11용 앱 완전 삭제 도구입니다. 앱의 제거 프로그램을 �
 ## 언어 통계
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://github-readme-stats.vercel.app/api/top-langs/?username=neramc&layout=compact&theme=dark&hide_border=true&bg_color=0d1117">
-  <img alt="Top languages" src="https://github-readme-stats.vercel.app/api/top-langs/?username=neramc&layout=compact&hide_border=true">
+  <source media="(prefers-color-scheme: dark)" srcset="https://github-readme-stats.vercel.app/api/top-langs/?username=neramc&layout=compact&theme=dark&hide_border=true&bg_color=0d1117&disable_animations=true">
+  <img alt="Top languages" src="https://github-readme-stats.vercel.app/api/top-langs/?username=neramc&layout=compact&hide_border=true&disable_animations=true">
 </picture>
