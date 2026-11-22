@@ -77,6 +77,7 @@ FONT: dict[str, list[str]] = {
     ":": [" ", " ", "#", " ", " ", "#", " "],
     "?": [" ### ", "#   #", "    #", "   # ", "  #  ", "     ", "  #  "],
     "/": ["    #", "    #", "   # ", "  #  ", " #   ", "#    ", "#    "],
+    "#": ["     ", " # # ", "#####", " # # ", "#####", " # # ", "     "],
     "+": ["     ", "  #  ", "  #  ", "#####", "  #  ", "  #  ", "     "],
     "!": ["#", "#", "#", "#", "#", " ", "#"],
     "·": [" ", " ", " ", "#", " ", " ", " "],
@@ -482,19 +483,249 @@ def card(name: str, icon_name: str, active: bool, tagline: str, stack: str, rele
     return svg(W, H, f"{name.title()} — {tagline}", "".join(body), "".join(style), defs)
 
 
-# ── footer ────────────────────────────────────────────────────────────────
-def footer() -> str:
-    W, H = 900, 90
+# ── the mine shaft: entrance, strata bands, gear panel, bedrock ───────────
+# Scrolling the README is a descent: each section starts with a band of rock
+# that gets darker the deeper it is, with the same ladder running down the
+# shaft on the left.
+SHAFT_X, SHAFT_W = 16, 56            # shaft column
+RAILS = (26, 58)                      # ladder rails (x), 4px wide
+WOOD, WOOD_DARK = "#9a6a3c", "#6b4826"
+
+SECTIONS = [
+    # key, English title, Korean title, depth
+    ("about", "ABOUT", "소개", 12),
+    ("inventory", "INVENTORY", "인벤토리", 24),
+    ("gear", "GEAR", "장비", 36),
+    ("workshop", "WORKSHOP", "작업실", 48),
+    ("logs", "LOGS", "기록", 60),
+]
+STRATA = {
+    False: ["#d9d0c5", "#b8aca3", "#938689", "#6a5f63", "#433a3e"],   # light mode
+    True: ["#3d3438", "#332b2f", "#2a2326", "#211b1e", "#181315"],    # dark mode
+}
+ORES = [  # (colour, glows) by depth tier
+    [("#3b3337", False), ("#c87f4a", False)],
+    [("#3b3337", False), ("#c87f4a", False), ("#d8c3b0", False)],
+    [("#c87f4a", False), ("#d8c3b0", False), (AMBER, False)],
+    [("#d8c3b0", False), (AMBER, False), (EMBER, True)],
+    [(AMBER, False), (EMBER, True), (GLOW, True)],
+]
+
+
+def shade(hex_color: str, amount: float) -> str:
+    """Lighten (amount > 0) or darken (amount < 0) a #rrggbb colour."""
+    r, g, b = (int(hex_color[i:i + 2], 16) for i in (1, 3, 5))
+    if amount >= 0:
+        r, g, b = (round(c + (255 - c) * amount) for c in (r, g, b))
+    else:
+        r, g, b = (round(c * (1 + amount)) for c in (r, g, b))
+    return f"#{r:02x}{g:02x}{b:02x}"
+
+
+def is_light(hex_color: str) -> bool:
+    r, g, b = (int(hex_color[i:i + 2], 16) for i in (1, 3, 5))
+    return (0.299 * r + 0.587 * g + 0.114 * b) > 140
+
+
+def ladder(y0: float, y1: float, phase: float = 0) -> str:
+    """Two rails and rungs every 16px; `phase` keeps rungs aligned across images."""
+    h = y1 - y0
+    out = [f'<rect x="{RAILS[0]}" y="{y0}" width="4" height="{h}" fill="{WOOD}"/>',
+           f'<rect x="{RAILS[1]}" y="{y0}" width="4" height="{h}" fill="{WOOD}"/>']
+    y = y0 + ((8 - phase) % 16)
+    while y + 4 <= y1:
+        out.append(f'<rect x="{RAILS[0] + 4}" y="{num(y)}" width="{RAILS[1] - RAILS[0] - 4}" height="4" fill="{WOOD}"/>'
+                   f'<rect x="{RAILS[0] + 4}" y="{num(y + 4)}" width="{RAILS[1] - RAILS[0] - 4}" height="2" fill="{WOOD_DARK}"/>')
+        y += 16
+    return "".join(out)
+
+
+def rock(rnd: random.Random, W: int, H: int, base: str, avoid: list[tuple[float, float]],
+         ores: list[tuple[str, bool]], ore_count: int, style: list[str]) -> str:
+    """Strata texture: veins, speckles and ore clusters, kept off `avoid` x-ranges."""
+    out = [f'<rect width="{W}" height="{H}" fill="{base}"/>',
+           f'<rect width="{W}" height="2" fill="{shade(base, 0.12)}"/>',
+           f'<rect y="{H - 4}" width="{W}" height="4" fill="{shade(base, -0.18)}"/>']
+
+    def free(x: float, w: float) -> bool:
+        return all(x + w < a or x > b for a, b in avoid)
+
+    # two wavy veins
+    for k, amount in enumerate((-0.12, 0.08)):
+        y = rnd.choice([16, 24, 40, 48]) + k * 8
+        d = ""
+        for x in range(SHAFT_X + SHAFT_W, W, 32):
+            y = max(6, min(H - 10, y + rnd.choice([-4, 0, 0, 4])))
+            d += f"M{x} {y}h32v4h-32z"
+        out.append(f'<path fill="{shade(base, amount)}" d="{d}"/>')
+    # speckles on an 8px grid
+    for _ in range(46):
+        x = rnd.randrange(SHAFT_X + SHAFT_W, W - 8, 4)
+        y = rnd.randrange(4, H - 8, 4)
+        w = rnd.choice([4, 4, 8])
+        out.append(f'<rect x="{x}" y="{y}" width="{w}" height="4" fill="{shade(base, rnd.choice([-0.1, 0.07]))}"/>')
+    # ore clusters
+    for i in range(ore_count):
+        for _ in range(40):
+            x = rnd.randrange(SHAFT_X + SHAFT_W + 8, W - 24, 6)
+            if free(x - 6, 30):
+                break
+        y = rnd.randrange(8, H - 20, 6)
+        color, glows = rnd.choice(ores)
+        cells = [(0, 0), (6, 0), (0, 6), (6, 6), (12, 6), (6, 12)]
+        rnd.shuffle(cells)
+        cls = f' class="g{i % 3}"' if glows else ""
+        d = "".join(f"M{x + cx} {y + cy}h6v6h-6z" for cx, cy in cells[:rnd.randint(3, 5)])
+        out.append(f'<path fill="{shade(color, -0.35)}" d="{d}" transform="translate(1 1)"/>'
+                   f'<path{cls} fill="{color}" d="{d}"/>')
+    style.append("@keyframes glow{0%,100%{opacity:1}50%{opacity:.45}}"
+                 ".g0{animation:glow 2.8s ease-in-out infinite}.g1{animation:glow 3.4s ease-in-out .7s infinite}"
+                 ".g2{animation:glow 4.1s ease-in-out 1.6s infinite}")
+    return "".join(out)
+
+
+def shaft(base: str, H: int) -> str:
+    return (f'<rect x="{SHAFT_X}" y="0" width="{SHAFT_W}" height="{H}" fill="{shade(base, -0.45)}"/>'
+            f'<rect x="{SHAFT_X}" y="0" width="4" height="{H}" fill="{shade(base, -0.6)}"/>'
+            f'<rect x="{SHAFT_X + SHAFT_W - 4}" y="0" width="4" height="{H}" fill="{shade(base, -0.25)}"/>')
+
+
+def band(index: int, key: str, title: str, title_ko: str, depth: int, dark: bool) -> str:
+    W, H = 900, 72
+    rnd = random.Random(f"{key}-{dark}")
+    base = STRATA[dark][index]
+    light = is_light(base)
+    ink = "#2e2629" if light else "#f1ebe6"
+    sub = "#4a4044" if light else "#c9c1bd"
+    accent = "#9a3412" if light else "#ff9a63"
+
+    ts = 4
+    tx, ty = SHAFT_X + SHAFT_W + 24, (H - 7 * ts) / 2
+    tw = text_width(title, ts)
+    label = f"-{depth}M"
+    ls = 3
+    lw = text_width(label, ls)
+    lx = W - 24 - lw
+    ko_x = tx + tw + 16
+    ko_w = len(title_ko) * 19
+    style: list[str] = []
+    body = [rock(rnd, W, H, base, [(tx - 12, ko_x + ko_w + 12), (lx - 36, W)], ORES[index], 4 + index, style),
+            shaft(base, H), ladder(0, H)]
+    body.append(pixel_text(title, tx + 3, ty + 3, ts, shade(base, -0.4)))
+    body.append(pixel_text(title, tx, ty, ts, ink))
+    body.append(f'<text x="{num(ko_x)}" y="{num(H / 2 + 6)}" fill="{sub}" '
+                f'style="font-family:{SANS};font-size:17px;font-weight:700">{escape(title_ko)}</text>')
+    # depth meter: a small down arrow and the depth
+    ax, ay = lx - 22, H / 2 - 5
+    body.append(f'<path fill="{accent}" d="M{ax} {ay}h12v3h-12zM{ax + 3} {ay + 3}h6v3h-6zM{ax + 5} {ay + 6}h2v3h-2z"/>')
+    body.append(pixel_text(label, lx, (H - 7 * ls) / 2, ls, accent))
+    style.append(REDUCED)
+    return svg(W, H, f"-{depth}m · {title_ko} ({title.title()})", "".join(body), "".join(style))
+
+
+def entrance(dark: bool) -> str:
+    """The ground surface with the top of the ladder sticking out of the shaft."""
+    W, H = 900, 64
+    rnd = random.Random(f"entrance-{dark}")
+    soil = STRATA[dark][0]
+    grass = "#7d8c5a" if not dark else "#4a5638"
+    text = "#7a7074" if not dark else ASH
+    gy = 36                                       # ground line
+    body = [f'<rect y="{gy}" width="{W}" height="{H - gy}" fill="{soil}"/>']
+    # ragged grass edge on an 8px grid
+    d = ""
+    for x in range(0, W, 8):
+        if SHAFT_X <= x < SHAFT_X + SHAFT_W:
+            continue
+        h = rnd.choice([4, 4, 8, 8, 12])
+        d += f"M{x} {gy - (h - 4)}h8v{h}h-8z"
+    body.append(f'<path fill="{grass}" d="{d}"/>')
+    body.append(f'<rect y="{gy + 8}" width="{W}" height="4" fill="{shade(soil, -0.1)}"/>')
+    body.append(f'<rect x="{SHAFT_X}" y="{gy}" width="{SHAFT_W}" height="{H - gy}" fill="{shade(soil, -0.45)}"/>')
+    body.append(ladder(gy - 28, H, phase=(gy - 28) % 16))
+    msg = "SCROLL DOWN"
+    mx = SHAFT_X + SHAFT_W + 24
+    body.append(pixel_text(msg, mx, 10, 2, text))
+    body.append(f'<text x="{num(mx + text_width(msg, 2) + 14)}" y="22" fill="{text}" '
+                f'style="font-family:{SANS};font-size:14px">아래로 내려갈수록 깊어집니다</text>')
+    style = ("@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(4px)}}"
+             ".arrow{animation:bob 1.2s steps(2) infinite}" + REDUCED)
+    ax = W - 40
+    body.append(f'<path class="arrow" fill="{EMBER}" d="M{ax} 8h16v4h-16zM{ax + 4} 12h8v4h-8zM{ax + 6} 16h4v4h-4z"/>')
+    return svg(W, H, "아래로 내려갈수록 깊어집니다", "".join(body), style)
+
+
+GEAR = [
+    ("언어", "Languages", EMBER, ["RUST", "TYPESCRIPT", "C#", "KOTLIN", "JAVA"]),
+    ("프레임워크", "Frameworks", AMBER, ["REMIX", "ASTRO", ".NET", "AVALONIA", "SLINT", "COMPOSE MULTIPLATFORM"]),
+    ("도구", "Tools", "#8a8186", ["BUN", "VITE", "GRADLE", "MAVEN", "GITHUB ACTIONS", "VERCEL", "PLAYWRIGHT"]),
+]
+
+
+def gear_panel() -> str:
+    W = 900
+    s = 2
+    chip_h = 7 * s + 16
+    pad_x, label_w = 24, 150
+    x0 = pad_x + label_w
+    rows: list[tuple[int, str]] = []          # (y, svg)
+    y = 28
+    body: list[str] = []
+    for label, label_en, color, items in GEAR:
+        body.append(f'<text x="{pad_x}" y="{y + 19}" fill="{CHALK}" '
+                    f'style="font-family:{SANS};font-size:16px;font-weight:700">{escape(label)}</text>')
+        body.append(f'<text x="{pad_x}" y="{y + 38}" fill="{ASH}" '
+                    f'style="font-family:{MONO};font-size:12px">{escape(label_en)}</text>')
+        x = x0
+        for item in items:
+            w = text_width(item, s) + 20
+            if x + w > W - pad_x:
+                x = x0
+                y += chip_h + 12
+            body.append(f'<rect x="{num(x)}" y="{y}" width="{num(w)}" height="{chip_h}" fill="{SLATE}"/>')
+            body.append(frame(x - 3, y - 3, w + 6, chip_h + 6, 3, color))
+            body.append(f'<rect x="{num(x)}" y="{y + chip_h - 3}" width="{num(w)}" height="3" fill="{shade(SLATE, -0.3)}"/>')
+            body.append(pixel_text(item, x + 10, y + 8, s, CHALK))
+            x += w + 16
+        y += chip_h + 30
+    H = y
+    out = [f'<rect x="4" y="4" width="{W - 8}" height="{H - 8}" fill="{COAL}"/>', frame(0, 0, W, H, 4, "#3b3337")]
+    alt = " · ".join(f"{label}: {', '.join(items)}" for label, _, _, items in GEAR)
+    return svg(W, H, alt, "".join(out + body), REDUCED)
+
+
+def bedrock() -> str:
+    """The bottom of the shaft, with the thank-you line."""
+    W, H = 900, 132
+    rnd = random.Random("bedrock")
+    body = [f'<rect width="{W}" height="{H}" fill="#0d0a0b"/>']
+    for _ in range(170):
+        x = rnd.randrange(0, W, 8)
+        y = rnd.randrange(0, H, 8)
+        body.append(f'<rect x="{x}" y="{y}" width="{rnd.choice([8, 16])}" height="8" '
+                    f'fill="{rnd.choice(["#1b1517", "#2e2629", "#161113", "#3b3337"])}"/>')
+    style = ["@keyframes glow{0%,100%{opacity:1}50%{opacity:.35}}",
+             ".v{animation:glow 3s ease-in-out infinite}.v2{animation:glow 3s ease-in-out 1.5s infinite}"]
+    for i in range(7):  # ember veins
+        x = rnd.randrange(SHAFT_X + SHAFT_W + 16, W - 40, 4)
+        y = rnd.choice([8, 100, 112])
+        d = "".join(f"M{x + k * 4} {y + rnd.choice([0, 4])}h4v4h-4z" for k in range(rnd.randint(3, 7)))
+        body.append(f'<path class="{"v" if i % 2 else "v2"}" fill="{EMBER}" d="{d}"/>')
+    body.append(f'<rect x="{SHAFT_X}" y="0" width="{SHAFT_W}" height="44" fill="#050404"/>')
+    body.append(ladder(0, 40))
+    body.append(f'<rect x="{SHAFT_X - 4}" y="40" width="{SHAFT_W + 8}" height="6" fill="#2e2629"/>')
+    body.append(pixel_text("-64M BEDROCK", SHAFT_X + SHAFT_W + 24, 22, 2, "#6e6468"))
+
     s = 3
     main, xp = "THANKS FOR VISITING!", "+1 XP"
     total = text_width(main, s) + 24 + text_width(xp, s)
     x = (W - total) / 2
-    y = 44
-    style = ("@keyframes xp{0%{opacity:0;transform:translateY(10px)}20%,70%{opacity:1;transform:translateY(0)}"
-             "100%{opacity:0;transform:translateY(-14px)}}.xp{animation:xp 2.4s ease-out infinite}" + REDUCED)
-    body = (pixel_text(main, x, y, s, ASH)
-            + f'<g class="xp">{pixel_text(xp, x + text_width(main, s) + 24, y, s, EMBER)}</g>')
-    return svg(W, H, "Thanks for visiting! +1 XP", body, style)
+    body.append(pixel_text(main, x, 62, s, BONE))
+    body.append(f'<g class="xp">{pixel_text(xp, x + text_width(main, s) + 24, 62, s, EMBER)}</g>')
+    style.append("@keyframes xp{0%{opacity:0;transform:translateY(10px)}20%,70%{opacity:1;transform:translateY(0)}"
+                 "100%{opacity:0;transform:translateY(-14px)}}.xp{animation:xp 2.4s ease-out infinite}")
+    style.append(REDUCED)
+    return svg(W, H, "-64m 기반암 · Thanks for visiting! +1 XP", "".join(body), "".join(style))
 
 
 # ── portfolio site exports ────────────────────────────────────────────────
@@ -525,12 +756,20 @@ def favicon() -> str:
 
 def main() -> None:
     (ASSETS / "cards").mkdir(parents=True, exist_ok=True)
+    (ASSETS / "shaft").mkdir(parents=True, exist_ok=True)
     out = {
         "header-light.svg": header(dark=False),
         "header-dark.svg": header(dark=True),
         "terminal.svg": terminal(),
-        "footer.svg": footer(),
+        "gear.svg": gear_panel(),
+        "shaft/entrance-light.svg": entrance(dark=False),
+        "shaft/entrance-dark.svg": entrance(dark=True),
+        "shaft/bedrock.svg": bedrock(),
     }
+    for i, (key, title, title_ko, depth) in enumerate(SECTIONS):
+        for dark in (False, True):
+            mode = "dark" if dark else "light"
+            out[f"shaft/{i + 1}-{key}-{mode}.svg"] = band(i, key, title, title_ko, depth, dark)
     for i, (slug, name, ic, active, tagline, stack, release) in enumerate(PROJECTS):
         out[f"cards/{slug}.svg"] = card(name, ic, active, tagline, stack, release, i)
     for rel, content in out.items():
