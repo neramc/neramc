@@ -73,11 +73,6 @@
 </div>
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://github-readme-stats.vercel.app/api/top-langs/?username=neramc&layout=compact&bg_color=141012&title_color=ff9a63&text_color=d8d1cc&border_radius=0&hide_border=true&disable_animations=true">
-  <img alt="많이 쓴 언어" src="https://github-readme-stats.vercel.app/api/top-langs/?username=neramc&layout=compact&bg_color=f3f0eb&title_color=c2410c&text_color=2e2629&border_radius=0&hide_border=true&disable_animations=true">
-</picture>
-
-<picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/neramc/neramc/output/github-snake-dark.svg">
   <img src="https://raw.githubusercontent.com/neramc/neramc/output/github-snake.svg" width="100%" alt="기여 그래프의 칸을 하나씩 먹어 치우는 뱀 애니메이션">
 </picture>
