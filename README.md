@@ -7,9 +7,9 @@
 
 <img src="assets/player.svg" width="100%" alt="neramc 플레이어 카드: 프로필 사진과 함께 — 웹과 데스크톱 앱을 만듭니다. I build web apps and native desktop tools. “빠르게, 안전하게, 그다음에 예쁘게.” 공개 프로젝트 5개(진행 중 2, 보관 3)">
 
-<a href="https://neramc.vercel.app"><img src="assets/buttons/portfolio.svg" height="44" alt="웹 포트폴리오"></a>
-<a href="#inventory"><img src="assets/buttons/inventory.svg" height="44" alt="인벤토리"></a>
-<a href="#workshop"><img src="assets/buttons/workshop.svg" height="44" alt="작업실"></a>
+<a href="https://neramc.vercel.app"><img src="assets/buttons/portfolio.svg" width="22%" alt="웹 포트폴리오"></a>
+<a href="#inventory"><img src="assets/buttons/inventory.svg" width="17%" alt="인벤토리"></a>
+<a href="#workshop"><img src="assets/buttons/workshop.svg" width="15%" alt="작업실"></a>
 
 <img src="assets/terminal.svg" width="100%" alt="터미널: $ whoami → neramc, $ ls ~/projects → linuxhub, app-deleter, quill, markdown-studio, connection-verify, $ cat ~/.motto → make it fast. make it safe. then make it pretty.">
 
