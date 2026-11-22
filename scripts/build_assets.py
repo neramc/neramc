@@ -1069,6 +1069,88 @@ def pipeline() -> str:
     return svg(W, H, alt, "".join(panel(W, H) + body), "".join(style))
 
 
+# ── player card: avatar + one-line intro, under the header ────────────────
+AVATAR = ASSETS / "avatar.png"   # a copy of the GitHub avatar; replace the file to update it
+
+
+def player_card() -> str:
+    import base64
+
+    W, H = 900, 216
+    rnd = random.Random("player")
+    body = panel(W, H)
+    style = ["@keyframes rise{0%{opacity:0;transform:translate(0,0)}20%{opacity:.9}"
+             "100%{opacity:0;transform:translate(var(--dx),-70px)}}",
+             "@keyframes tw{0%,60%,100%{opacity:0}70%,85%{opacity:1}}",
+             ".tw1{animation:tw 2.6s steps(1) infinite}.tw2{animation:tw 2.6s steps(1) 1.3s infinite}"]
+
+    # avatar in an inventory slot
+    sx, sy, ss = 28, 24, 168
+    body.append(f'<rect x="{sx}" y="{sy}" width="{ss}" height="{ss}" fill="#241d20"/>'
+                f'<path fill="#0d0a0b" d="M{sx} {sy}h{ss}v6h-{ss - 6}v{ss - 6}h-6z"/>'
+                f'<path fill="#3d3438" d="M{sx + ss} {sy + ss}h-{ss}v-6h{ss - 6}v-{ss - 6}h6z"/>')
+    if AVATAR.exists():
+        data = base64.b64encode(AVATAR.read_bytes()).decode()
+        body.append(f'<image x="{sx + 12}" y="{sy + 12}" width="{ss - 24}" height="{ss - 24}" '
+                    f'style="image-rendering:pixelated" href="data:image/png;base64,{data}"/>')
+    body.append(f'<rect class="tw1" x="{sx + ss - 18}" y="{sy + 12}" width="5" height="5" fill="{GLOW}"/>'
+                f'<rect class="tw2" x="{sx + 14}" y="{sy + ss - 20}" width="5" height="5" fill="{GLOW}"/>')
+
+    # name plate and the intro
+    tx = sx + ss + 32
+    body.append(pixel_text("NERAMC", tx, 34, 3, EMBER_SOFT))
+    tag = "PLAYER 1"
+    tw = text_width(tag, 1.5) + 12
+    nx = tx + text_width("NERAMC", 3) + 14
+    body.append(f'<rect x="{num(nx)}" y="36" width="{num(tw)}" height="16" fill="{EMBER}"/>')
+    body.append(pixel_text(tag, nx + 6, 38.75, 1.5, COAL))
+    body.append(label(tx, 94, "웹과 데스크톱 앱을 만듭니다.", 27, CHALK, weight=800))
+    body.append(label(tx, 122, "I build web apps and native desktop tools.", 15, FOG, weight=400))
+    body.append(f'<text x="{tx}" y="150" fill="{EMBER_SOFT}" '
+                f'style="font-family:{MONO};font-size:14px">“빠르게, 안전하게, 그다음에 예쁘게.”</text>')
+
+    # inventory count (5 public projects: 2 active, 3 archived)
+    x = tx
+    for ic, text, color in (("pickaxe", "ITEMS 5", BONE), ("penguin", "ACTIVE 2", EMBER_SOFT),
+                            ("quill", "ARCHIVED 3", FOG)):
+        body.append(icon(ic, x, 166, 1.5))
+        body.append(pixel_text(text, x + 30, 171, 1.5, color))
+        x += 30 + text_width(text, 1.5) + 28
+
+    # a few embers drifting up on the right
+    for i in range(9):
+        ex = rnd.randrange(W - 260, W - 30, 4)
+        ey = rnd.randrange(120, H - 20, 4)
+        dur = rnd.uniform(3.2, 6.0)
+        style.append(f".e{i}{{--dx:{rnd.randint(-16, 16)}px;animation:rise {dur:.1f}s linear -{rnd.uniform(0, dur):.1f}s infinite}}")
+        body.append(f'<rect class="e{i}" x="{ex}" y="{ey}" width="{rnd.choice([4, 6])}" height="{rnd.choice([4, 6])}" '
+                    f'fill="{rnd.choice([EMBER, AMBER, GLOW])}" opacity="0"/>')
+    style.append(REDUCED)
+    return svg(W, H, "neramc — 웹과 데스크톱 앱을 만듭니다. I build web apps and native desktop tools.",
+               "".join(body), "".join(style))
+
+
+BUTTONS = [
+    ("portfolio", "웹 포트폴리오", "globe", True),
+    ("inventory", "인벤토리", "pickaxe", False),
+    ("workshop", "작업실", "cog", False),
+]
+
+
+def button(text: str, icon_name: str, primary: bool) -> str:
+    h = 48
+    w = 64 + len(text) * 16 + 24
+    fill = EMBER if primary else SLATE
+    ink = COAL if primary else CHALK
+    edge = COAL if primary else "#5a5155"
+    body = [f'<rect x="4" y="4" width="{w - 8}" height="{h - 8}" fill="{fill}"/>',
+            frame(0, 0, w, h, 4, edge),
+            f'<rect x="4" y="{h - 10}" width="{w - 8}" height="6" fill="{shade(fill, -0.25)}"/>',
+            icon(icon_name, 16, 10, 1.5),
+            label(48, 30, text, 16, ink, weight=800)]
+    return svg(w, h, text, "".join(body))
+
+
 def bedrock() -> str:
     """The bottom of the shaft, with the thank-you line."""
     W, H = 900, 132
@@ -1132,18 +1214,22 @@ def favicon() -> str:
 def main() -> None:
     (ASSETS / "cards").mkdir(parents=True, exist_ok=True)
     (ASSETS / "shaft").mkdir(parents=True, exist_ok=True)
+    (ASSETS / "buttons").mkdir(parents=True, exist_ok=True)
     out = {
         "header-light.svg": header(dark=False),
         "header-dark.svg": header(dark=True),
         "terminal.svg": terminal(),
         "gear.svg": gear_panel(),
         "about.svg": about_panel(),
+        "player.svg": player_card(),
         "projects.svg": project_chart(),
         "pipeline.svg": pipeline(),
         "shaft/entrance-light.svg": entrance(dark=False),
         "shaft/entrance-dark.svg": entrance(dark=True),
         "shaft/bedrock.svg": bedrock(),
     }
+    for key, text, ic, primary in BUTTONS:
+        out[f"buttons/{key}.svg"] = button(text, ic, primary)
     for i, (key, title, title_ko, depth) in enumerate(SECTIONS):
         for dark in (False, True):
             mode = "dark" if dark else "light"
