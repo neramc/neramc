@@ -5,12 +5,11 @@
   <img src="assets/header-light.svg" width="100%" alt="NERAMC — 픽셀 곡괭이가 글자를 캐는 헤더. Web apps · Desktop tools">
 </picture>
 
-<img src="https://avatars.githubusercontent.com/neramc?size=240" width="120" alt="neramc 프로필 사진">
+<img src="assets/player.svg" width="100%" alt="neramc 플레이어 카드: 프로필 사진과 함께 — 웹과 데스크톱 앱을 만듭니다. I build web apps and native desktop tools. “빠르게, 안전하게, 그다음에 예쁘게.” 공개 프로젝트 5개(진행 중 2, 보관 3)">
 
-**웹과 데스크톱 앱을 만듭니다.**<br>
-<sub>I build web apps and native desktop tools.</sub>
-
-[웹 포트폴리오](https://neramc.vercel.app) · [인벤토리](#inventory) · [작업실](#workshop)
+<a href="https://neramc.vercel.app"><img src="assets/buttons/portfolio.svg" height="44" alt="웹 포트폴리오"></a>
+<a href="#inventory"><img src="assets/buttons/inventory.svg" height="44" alt="인벤토리"></a>
+<a href="#workshop"><img src="assets/buttons/workshop.svg" height="44" alt="작업실"></a>
 
 <img src="assets/terminal.svg" width="100%" alt="터미널: $ whoami → neramc, $ ls ~/projects → linuxhub, app-deleter, quill, markdown-studio, connection-verify, $ cat ~/.motto → make it fast. make it safe. then make it pretty.">
 
