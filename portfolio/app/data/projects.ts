@@ -155,5 +155,5 @@ export const gear: { label: string; items: string[] }[] = [
     label: '프레임워크',
     items: ['Remix', 'Astro', '.NET', 'Avalonia', 'Slint', 'Compose Multiplatform'],
   },
-  { label: '도구', items: ['Bun', 'Gradle', 'Maven', 'GitHub Actions', 'Vercel', 'Playwright'] },
+  { label: '도구', items: ['Bun', 'Vite', 'Gradle', 'Maven', 'GitHub Actions', 'Vercel', 'Playwright'] },
 ]
