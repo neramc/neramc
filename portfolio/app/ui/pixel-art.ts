@@ -80,6 +80,50 @@ export const ICONS = {
     rows: ["................", "................", "................", ".kkkkkkkkkkkkkk.", ".kyyyyyyykyyyyk.", ".kyykykyyyyyyyk.", ".kykkkkkykyllyk.", ".kyykykyyyyyyyk.", ".kykkkkkykyllyk.", ".kyykykyyyyyyyk.", ".kyyyyyyykyyyyk.", ".kkkkkkkkkkkkkk.", "................", "................", "................", "................"],
     palette: {"k": "#141012", "y": "#f2b84b", "l": "#b7791f"},
   },
+  "globe": {
+    rows: ["................", ".....kkkkkk.....", "...kkbbbggbkk...", "..kbbbgggggbbk..", "..kbbgggggbbbk..", ".kbbbbggbbbbbbk.", ".kbbbbbgbbbggbk.", ".kbbbbbbbbgggbk.", ".kbbgbbbbbgggbk.", ".kbgggbbbbbggbk.", "..kbgggbbbbbbk..", "..kbbggbbbbbbk..", "...kkbbbbbbkk...", ".....kkkkkk.....", "................", "................"],
+    palette: {"k": "#141012", "b": "#5b8fd6", "g": "#7fb069"},
+  },
+  "window": {
+    rows: ["................", ".kkkkkkkkkkkkkk.", ".kmmmmmmmmlleek.", ".kkkkkkkkkkkkkk.", ".kwwwwwwwwwwwwk.", ".kwddddwwwwwwwk.", ".kwwwwwwwwwwwwk.", ".kwddddddwwwwwk.", ".kwwwwwwwwwwwwk.", ".kwdddwwwwwwwwk.", ".kwwwwwwwwwwwwk.", ".kkkkkkkkkkkkkk.", "................", "................", "................", "................"],
+    palette: {"k": "#141012", "m": "#5a5155", "l": "#a39a9e", "e": "#ff7a3d", "w": "#ece7e0", "d": "#b9b0b4"},
+  },
+  "monitor": {
+    rows: ["................", ".kkkkkkkkkkkkkk.", ".kbbbbbbbbbbbbk.", ".kbwwbbbbbbbbbk.", ".kbwbbbbbbbbbbk.", ".kbbbbbbbbbbbbk.", ".kbbbbbbbbbbbbk.", ".kbbbbbbbbbbbbk.", ".kbbbbbbbbbbbbk.", ".kkkkkkkkkkkkkk.", "......kkkk......", "......kmmk......", "....kkkkkkkk....", "....kmmmmmmk....", "....kkkkkkkk....", "................"],
+    palette: {"k": "#141012", "b": "#3d6fb0", "w": "#9cc0ee", "m": "#7a7276"},
+  },
+  "server": {
+    rows: ["................", "..kkkkkkkkkkkk..", "..kmmmmmmmmmmk..", "..kmgmmmmllllk..", "..kmmmmmmmmmmk..", "..kkkkkkkkkkkk..", "..kmmmmmmmmmmk..", "..kmemmmmllllk..", "..kmmmmmmmmmmk..", "..kkkkkkkkkkkk..", "..kmmmmmmmmmmk..", "..kmgmmmmllllk..", "..kmmmmmmmmmmk..", "..kkkkkkkkkkkk..", "....kk....kk....", "................"],
+    palette: {"k": "#141012", "m": "#6e6468", "l": "#3b3337", "g": "#7fd16b", "e": "#ff7a3d"},
+  },
+  "stopwatch": {
+    rows: ["................", "......kkkk......", ".......kk.......", ".....kkkkkk.....", "...kkwwwwwwkk...", "..kwwwwkwwwwwk..", "..kwwwwkwwwwwk..", ".kwwwwwkwwwwwwk.", ".kwwwwwkkkkwwwk.", ".kwwwwwwwwwwwwk.", ".kwwwwwwwwwwwwk.", "..kwwwwwwwwwwk..", "..kwwwwwwwwwwk..", "...kkwwwwwwkk...", ".....kkkkkk.....", "................"],
+    palette: {"k": "#141012", "w": "#f1ebe6"},
+  },
+  "shield": {
+    rows: ["................", "..kkkkkkkkkkkk..", "..keeeeeeeeeek..", "..keeeeeeeewek..", "..keeeeeeewwek..", "..keweeeewweek..", "..kewweewweeek..", "..keewwwweeeek..", "...keewweeeek...", "...keeeeeeeek...", "....keeeeeek....", ".....keeeek.....", "......kkkk......", "................", "................", "................"],
+    palette: {"k": "#141012", "e": "#ff7a3d", "w": "#fff4ea"},
+  },
+  "checklist": {
+    rows: ["................", ".kkkkkkkkkkkkkk.", ".kwwwwwwwwwwwwk.", ".kwkkkwwwwwwwwk.", ".kwkgkwllllllwk.", ".kwkkkwwwwwwwwk.", ".kwwwwwwwwwwwwk.", ".kwkkkwwwwwwwwk.", ".kwkgkwllllllwk.", ".kwkkkwwwwwwwwk.", ".kwwwwwwwwwwwwk.", ".kwkkkwwwwwwwwk.", ".kwkgkwllllllwk.", ".kwkkkwwwwwwwwk.", ".kkkkkkkkkkkkkk.", "................"],
+    palette: {"k": "#141012", "w": "#ece7e0", "g": "#5fb84a", "l": "#b9b0b4"},
+  },
+  "cog": {
+    rows: ["................", ".......kk.......", "...kk.keek.kk...", "...keekeekeek...", "....keeeeeek....", ".kkkeekkkkeekkk.", ".keeeek..keeeek.", "..keek....keek..", "..keek....keek..", ".keeeek..keeeek.", ".kkkeekkkkeekkk.", "....keeeeeek....", "...keekeekeek...", "...kk.keek.kk...", ".......kk.......", "................"],
+    palette: {"k": "#141012", "e": "#b9b0b4"},
+  },
+  "terminal": {
+    rows: ["................", ".kkkkkkkkkkkkkk.", ".kmmmmmmmmmmmmk.", ".kkkkkkkkkkkkkk.", ".kddddddddddddk.", ".kdeddddddddddk.", ".kddedddddddddk.", ".kdddeddddddddk.", ".kddedddddddddk.", ".kdedddwwwwdddk.", ".kddddddddddddk.", ".kkkkkkkkkkkkkk.", "................", "................", "................", "................"],
+    palette: {"k": "#141012", "m": "#5a5155", "d": "#1b1517", "e": "#ff7a3d", "w": "#f1ebe6"},
+  },
+  "picture": {
+    rows: ["................", ".kkkkkkkkkkkkkk.", ".kbbbbbbbbbbybk.", ".kbbbbbbbbbyyyk.", ".kbbbbbbbbbbybk.", ".kbbbbbbbbbbbbk.", ".kbbbbbgbbbbbbk.", ".kbbbbgggbbbbbk.", ".kbbbgggggbgbbk.", ".kbbgggggggggbk.", ".kbgggggggggggk.", ".kkkkkkkkkkkkkk.", "................", "................", "................", "................"],
+    palette: {"k": "#141012", "b": "#9cc0ee", "y": "#f2b84b", "g": "#6a9a52"},
+  },
+  "snake": {
+    rows: ["................", "................", "..........kkkk..", ".........keeeek.", ".........kekeek.", ".........keeeek.", "..kkkkk...keek..", ".keeeeek..keek..", ".kekkkeek.keek..", ".kek..keekkeek..", ".kek...keeeek...", ".kek....kkkk....", ".kek............", "..k.............", "................", "................"],
+    palette: {"k": "#141012", "e": "#ff7a3d"},
+  },
 } satisfies Record<string, PixelArt>
 
 export type IconName = keyof typeof ICONS

@@ -235,6 +235,204 @@ ICONS: dict[str, tuple[list[str], dict[str, str]]] = {
         "................",
         "................",
     ], {"k": INK, "y": AMBER, "l": "#b7791f"}),
+    "globe": ([
+        "................",
+        ".....kkkkkk.....",
+        "...kkbbbggbkk...",
+        "..kbbbgggggbbk..",
+        "..kbbgggggbbbk..",
+        ".kbbbbggbbbbbbk.",
+        ".kbbbbbgbbbggbk.",
+        ".kbbbbbbbbgggbk.",
+        ".kbbgbbbbbgggbk.",
+        ".kbgggbbbbbggbk.",
+        "..kbgggbbbbbbk..",
+        "..kbbggbbbbbbk..",
+        "...kkbbbbbbkk...",
+        ".....kkkkkk.....",
+        "................",
+        "................",
+    ], {"k": INK, "b": "#5b8fd6", "g": "#7fb069"}),
+    "window": ([
+        "................",
+        ".kkkkkkkkkkkkkk.",
+        ".kmmmmmmmmlleek.",
+        ".kkkkkkkkkkkkkk.",
+        ".kwwwwwwwwwwwwk.",
+        ".kwddddwwwwwwwk.",
+        ".kwwwwwwwwwwwwk.",
+        ".kwddddddwwwwwk.",
+        ".kwwwwwwwwwwwwk.",
+        ".kwdddwwwwwwwwk.",
+        ".kwwwwwwwwwwwwk.",
+        ".kkkkkkkkkkkkkk.",
+        "................",
+        "................",
+        "................",
+        "................",
+    ], {"k": INK, "m": "#5a5155", "l": "#a39a9e", "e": EMBER, "w": "#ece7e0", "d": "#b9b0b4"}),
+    "monitor": ([
+        "................",
+        ".kkkkkkkkkkkkkk.",
+        ".kbbbbbbbbbbbbk.",
+        ".kbwwbbbbbbbbbk.",
+        ".kbwbbbbbbbbbbk.",
+        ".kbbbbbbbbbbbbk.",
+        ".kbbbbbbbbbbbbk.",
+        ".kbbbbbbbbbbbbk.",
+        ".kbbbbbbbbbbbbk.",
+        ".kkkkkkkkkkkkkk.",
+        "......kkkk......",
+        "......kmmk......",
+        "....kkkkkkkk....",
+        "....kmmmmmmk....",
+        "....kkkkkkkk....",
+        "................",
+    ], {"k": INK, "b": "#3d6fb0", "w": "#9cc0ee", "m": "#7a7276"}),
+    "server": ([
+        "................",
+        "..kkkkkkkkkkkk..",
+        "..kmmmmmmmmmmk..",
+        "..kmgmmmmllllk..",
+        "..kmmmmmmmmmmk..",
+        "..kkkkkkkkkkkk..",
+        "..kmmmmmmmmmmk..",
+        "..kmemmmmllllk..",
+        "..kmmmmmmmmmmk..",
+        "..kkkkkkkkkkkk..",
+        "..kmmmmmmmmmmk..",
+        "..kmgmmmmllllk..",
+        "..kmmmmmmmmmmk..",
+        "..kkkkkkkkkkkk..",
+        "....kk....kk....",
+        "................",
+    ], {"k": INK, "m": "#6e6468", "l": "#3b3337", "g": "#7fd16b", "e": EMBER}),
+    "stopwatch": ([
+        "................",
+        "......kkkk......",
+        ".......kk.......",
+        ".....kkkkkk.....",
+        "...kkwwwwwwkk...",
+        "..kwwwwkwwwwwk..",
+        "..kwwwwkwwwwwk..",
+        ".kwwwwwkwwwwwwk.",
+        ".kwwwwwkkkkwwwk.",
+        ".kwwwwwwwwwwwwk.",
+        ".kwwwwwwwwwwwwk.",
+        "..kwwwwwwwwwwk..",
+        "..kwwwwwwwwwwk..",
+        "...kkwwwwwwkk...",
+        ".....kkkkkk.....",
+        "................",
+    ], {"k": INK, "w": "#f1ebe6"}),
+    "shield": ([
+        "................",
+        "..kkkkkkkkkkkk..",
+        "..keeeeeeeeeek..",
+        "..keeeeeeeewek..",
+        "..keeeeeeewwek..",
+        "..keweeeewweek..",
+        "..kewweewweeek..",
+        "..keewwwweeeek..",
+        "...keewweeeek...",
+        "...keeeeeeeek...",
+        "....keeeeeek....",
+        ".....keeeek.....",
+        "......kkkk......",
+        "................",
+        "................",
+        "................",
+    ], {"k": INK, "e": EMBER, "w": "#fff4ea"}),
+    "checklist": ([
+        "................",
+        ".kkkkkkkkkkkkkk.",
+        ".kwwwwwwwwwwwwk.",
+        ".kwkkkwwwwwwwwk.",
+        ".kwkgkwllllllwk.",
+        ".kwkkkwwwwwwwwk.",
+        ".kwwwwwwwwwwwwk.",
+        ".kwkkkwwwwwwwwk.",
+        ".kwkgkwllllllwk.",
+        ".kwkkkwwwwwwwwk.",
+        ".kwwwwwwwwwwwwk.",
+        ".kwkkkwwwwwwwwk.",
+        ".kwkgkwllllllwk.",
+        ".kwkkkwwwwwwwwk.",
+        ".kkkkkkkkkkkkkk.",
+        "................",
+    ], {"k": INK, "w": "#ece7e0", "g": "#5fb84a", "l": "#b9b0b4"}),
+    "cog": ([
+        "................",
+        ".......kk.......",
+        "...kk.keek.kk...",
+        "...keekeekeek...",
+        "....keeeeeek....",
+        ".kkkeekkkkeekkk.",
+        ".keeeek..keeeek.",
+        "..keek....keek..",
+        "..keek....keek..",
+        ".keeeek..keeeek.",
+        ".kkkeekkkkeekkk.",
+        "....keeeeeek....",
+        "...keekeekeek...",
+        "...kk.keek.kk...",
+        ".......kk.......",
+        "................",
+    ], {"k": INK, "e": "#b9b0b4"}),
+    "terminal": ([
+        "................",
+        ".kkkkkkkkkkkkkk.",
+        ".kmmmmmmmmmmmmk.",
+        ".kkkkkkkkkkkkkk.",
+        ".kddddddddddddk.",
+        ".kdeddddddddddk.",
+        ".kddedddddddddk.",
+        ".kdddeddddddddk.",
+        ".kddedddddddddk.",
+        ".kdedddwwwwdddk.",
+        ".kddddddddddddk.",
+        ".kkkkkkkkkkkkkk.",
+        "................",
+        "................",
+        "................",
+        "................",
+    ], {"k": INK, "m": "#5a5155", "d": "#1b1517", "e": EMBER, "w": "#f1ebe6"}),
+    "picture": ([
+        "................",
+        ".kkkkkkkkkkkkkk.",
+        ".kbbbbbbbbbbybk.",
+        ".kbbbbbbbbbyyyk.",
+        ".kbbbbbbbbbbybk.",
+        ".kbbbbbbbbbbbbk.",
+        ".kbbbbbgbbbbbbk.",
+        ".kbbbbgggbbbbbk.",
+        ".kbbbgggggbgbbk.",
+        ".kbbgggggggggbk.",
+        ".kbgggggggggggk.",
+        ".kkkkkkkkkkkkkk.",
+        "................",
+        "................",
+        "................",
+        "................",
+    ], {"k": INK, "b": "#9cc0ee", "y": AMBER, "g": "#6a9a52"}),
+    "snake": ([
+        "................",
+        "................",
+        "..........kkkk..",
+        ".........keeeek.",
+        ".........kekeek.",
+        ".........keeeek.",
+        "..kkkkk...keek..",
+        ".keeeeek..keek..",
+        ".kekkkeek.keek..",
+        ".kek..keekkeek..",
+        ".kek...keeeek...",
+        ".kek....kkkk....",
+        ".kek............",
+        "..k.............",
+        "................",
+        "................",
+    ], {"k": INK, "e": EMBER}),
 }
 
 
@@ -659,6 +857,7 @@ GEAR = [
     ("언어", "Languages", EMBER, ["RUST", "TYPESCRIPT", "C#", "KOTLIN", "JAVA"]),
     ("프레임워크", "Frameworks", AMBER, ["REMIX", "ASTRO", ".NET", "AVALONIA", "SLINT", "COMPOSE MULTIPLATFORM"]),
     ("도구", "Tools", "#8a8186", ["BUN", "VITE", "GRADLE", "MAVEN", "GITHUB ACTIONS", "VERCEL", "PLAYWRIGHT"]),
+    ("라이브러리", "Libraries", "#5b8fd6", ["RAYON", "ROPEY", "MARKDIG", "SKIASHARP", "TEXTMATESHARP", "NITRO", "PAPER API"]),
 ]
 
 
@@ -692,6 +891,182 @@ def gear_panel() -> str:
     out = [f'<rect x="4" y="4" width="{W - 8}" height="{H - 8}" fill="{COAL}"/>', frame(0, 0, W, H, 4, "#3b3337")]
     alt = " · ".join(f"{label}: {', '.join(items)}" for label, _, _, items in GEAR)
     return svg(W, H, alt, "".join(out + body), REDUCED)
+
+
+# ── pictures that replace long README prose ───────────────────────────────
+def panel(W: int, H: int) -> list[str]:
+    return [f'<rect x="4" y="4" width="{W - 8}" height="{H - 8}" fill="{COAL}"/>', frame(0, 0, W, H, 4, "#3b3337")]
+
+
+def slot(x: float, y: float, size: float, icon_name: str, dim: bool = False) -> str:
+    inner = size - 8
+    scale = inner / 16
+    art = icon(icon_name, x + 4, y + 4, scale)
+    if dim:
+        art = f'<g opacity="0.22" filter="url(#gray)">{art}</g>'
+    return (f'<rect x="{num(x)}" y="{num(y)}" width="{size}" height="{size}" fill="#241d20"/>'
+            f'<path fill="#0d0a0b" d="M{num(x)} {num(y)}h{size}v4h-{size - 4}v{size - 4}h-4z"/>'
+            f'<path fill="#3d3438" d="M{num(x + size)} {num(y + size)}h-{size}v-4h{size - 4}v-{size - 4}h4z"/>'
+            + art)
+
+
+def label(x: float, y: float, text: str, size: float = 15, color: str = BONE, anchor: str = "start",
+          weight: int = 700) -> str:
+    return (f'<text x="{num(x)}" y="{num(y)}" fill="{color}" text-anchor="{anchor}" '
+            f'style="font-family:{SANS};font-size:{size}px;font-weight:{weight}">{escape(text)}</text>')
+
+
+def chip(x: float, y: float, text: str, color: str, scale: float = 1.5, fill: str = SLATE) -> tuple[str, float]:
+    h = 7 * scale + 12
+    w = text_width(text, scale) + 16
+    out = (f'<rect x="{num(x)}" y="{num(y)}" width="{num(w)}" height="{num(h)}" fill="{fill}"/>'
+           + frame(x - 3, y - 3, w + 6, h + 6, 3, color)
+           + pixel_text(text, x + 8, y + 6, scale, CHALK))
+    return out, w
+
+
+ABOUT_ROWS = [
+    ("만드는 것", [
+        ("globe", None, "웹 사이트"),
+        ("window", None, "Windows 앱"),
+        ("monitor", None, "데스크톱 편집기"),
+        ("server", None, "게임 서버 플러그인"),
+    ]),
+    ("일하는 방식", [
+        ("stopwatch", "52MS", "숫자로 확인"),
+        ("shield", "SAFE", "되돌릴 수 있게"),
+        ("checklist", "CI", "빌드가 검증"),
+        ("cog", "AUTO", "반복은 자동화"),
+    ]),
+]
+
+
+def about_panel() -> str:
+    W = 900
+    col_w = (W - 48) / 4
+    body: list[str] = []
+    y = 28
+    for row_label, tiles in ABOUT_ROWS:
+        body.append(label(28, y + 14, row_label, 15, ASH))
+        y += 30
+        for i, (ic, token, caption) in enumerate(tiles):
+            cx = 24 + col_w * i + col_w / 2
+            body.append(slot(cx - 44, y, 88, ic))
+            ty = y + 104
+            if token:
+                tw = text_width(token, 2)
+                body.append(pixel_text(token, cx - tw / 2, ty, 2, EMBER_SOFT))
+                ty += 26
+            body.append(label(cx, ty + 12, caption, 15, CHALK, "middle"))
+        y += 104 + (26 if any(t[1] for t in tiles) else 0) + 40
+    H = int(y)
+    alt = "만드는 것: 웹 사이트, Windows 앱, 데스크톱 편집기, 게임 서버 플러그인 · 일하는 방식: 숫자로 확인, 되돌릴 수 있게, 빌드가 검증, 반복은 자동화"
+    return svg(W, H, alt, "".join(panel(W, H) + body), REDUCED)
+
+
+CHART = [
+    # icon, name, active, platforms(web, desktop, server), metrics, release
+    ("penguin", "LINUXHUB", True, (1, 0, 0), ["50 DISTROS", "6H SYNC", "2 LANGS"], ""),
+    ("trash", "APP DELETER", True, (0, 1, 0), ["WIN 11", "1 EXE", ".REG BACKUP"], "V2.0.0"),
+    ("quill", "QUILL", False, (0, 1, 0), ["8 DIALECTS", "14 CHECKS", "7 EXPORTS"], "V1.3.0"),
+    ("page", "MARKDOWN STUDIO", False, (0, 1, 0), ["52MS", "7 LANGS", "3 OS"], "V2.3.1"),
+    ("ticket", "CONNECTION VERIFY", False, (0, 0, 1), ["5 EDITIONS", "TXT JSON", "2 LANGS"], "V2.1.3"),
+]
+
+
+def project_chart() -> str:
+    W = 900
+    row_h = 84
+    head = 52
+    x_plat, x_metric = 404, 538
+    body = [label(28, 34, "프로젝트", 13, ASH, weight=400),
+            label(x_plat, 34, "플랫폼", 13, ASH, weight=400),
+            label(x_metric, 34, "숫자로 보기", 13, ASH, weight=400)]
+    for i, (ic, name, active, plats, metrics, release) in enumerate(CHART):
+        y = head + i * row_h
+        if i:
+            body.append(f'<rect x="24" y="{y - 2}" width="{W - 48}" height="2" fill="#2a2124"/>')
+        body.append(slot(24, y + 10, 64, ic, dim=False))
+        body.append(pixel_text(name, 104, y + 18, 2.2, EMBER_SOFT if active else CHALK))
+        tag = "ACTIVE" if active else "ARCHIVED"
+        tw = text_width(tag, 1.2) + 10
+        body.append(f'<rect x="104" y="{y + 44}" width="{num(tw)}" height="14" fill="{EMBER if active else "#4a4044"}"/>')
+        body.append(pixel_text(tag, 109, y + 46.8, 1.2, COAL if active else BONE))
+        if release:
+            body.append(pixel_text(release, 104 + tw + 10, y + 46.8, 1.2, FOG))
+        for k, (pic, on) in enumerate(zip(("globe", "monitor", "server"), plats)):
+            body.append(slot(x_plat + k * 40, y + 22, 36, pic, dim=not on))
+        x = x_metric
+        for metric in metrics:
+            out, w = chip(x, y + 26, metric, EMBER if active else STONE)
+            assert x + w <= W - 24, (name, metric)
+            body.append(out)
+            x += w + 14
+    H = head + len(CHART) * row_h + 12
+    defs = '<filter id="gray"><feColorMatrix type="saturate" values="0"/></filter>'
+    alt = " · ".join(f"{name.title()}: {', '.join(m.lower() for m in metrics)}" for _, name, _, _, metrics, _ in CHART)
+    return svg(W, H, alt, "".join(panel(W, H) + body), REDUCED, defs)
+
+
+PIPELINE = [
+    ("그림", [("icon", "terminal", "PYTHON"), ("icon", "picture", "SVG"), ("icon", "page", "README"),
+              ("icon", "globe", "SITE")]),
+    ("웹 사이트", [("chip", None, "REMIX 3"), ("chip", None, "VITE"), ("chip", None, "NITRO"),
+                 ("chip", None, "VERCEL"), ("icon", "globe", "LIVE")]),
+    ("기여 뱀", [("icon", "cog", "DAILY"), ("chip", None, "ACTIONS"), ("icon", "snake", "SNAKE"),
+               ("chip", None, "OUTPUT")]),
+]
+
+
+def arrow(x0: float, x1: float, y: float, color: str = STONE) -> str:
+    return (f'<rect x="{num(x0)}" y="{num(y - 2)}" width="{num(x1 - x0 - 8)}" height="4" fill="{color}"/>'
+            f'<path fill="{color}" d="M{num(x1 - 10)} {num(y - 8)}h4v16h-4zM{num(x1 - 6)} {num(y - 5)}h3v10h-3zM{num(x1 - 3)} {num(y - 2)}h3v4h-3z"/>')
+
+
+def pipeline() -> str:
+    W = 900
+    lane_h = 104
+    x0 = 150
+    body: list[str] = []
+    style = ["@keyframes flow{0%{transform:translateX(0);opacity:0}15%,85%{opacity:1}100%{transform:translateX(var(--d));opacity:0}}"]
+    for li, (lane, nodes) in enumerate(PIPELINE):
+        y = 24 + li * lane_h
+        cy = y + 30
+        body.append(label(28, cy + 6, lane, 15, CHALK))
+        # measure nodes
+        widths = []
+        for kind, ic, text in nodes:
+            widths.append(56 if kind == "icon" else text_width(text, 1.8) + 18)
+        gap = (W - 28 - x0 - sum(widths)) / (len(nodes) - 1)
+        x = x0
+        centers = []
+        for (kind, ic, text), w in zip(nodes, widths):
+            if kind == "icon":
+                body.append(slot(x, cy - 28, 56, ic))
+                tw = text_width(text, 1.2)
+                body.append(pixel_text(text, x + 28 - tw / 2, cy + 36, 1.2, FOG))
+            else:
+                h = 7 * 1.8 + 14
+                body.append(f'<rect x="{num(x)}" y="{num(cy - h / 2)}" width="{num(w)}" height="{num(h)}" fill="{SLATE}"/>')
+                body.append(frame(x - 3, cy - h / 2 - 3, w + 6, h + 6, 3, EMBER if li == 1 else STONE))
+                body.append(pixel_text(text, x + 9, cy - 7 * 1.8 / 2, 1.8, CHALK))
+            centers.append((x, x + w))
+            x += w + gap
+        for (a0, a1), (b0, _), (_, _, text) in zip(centers, centers[1:], nodes[1:]):
+            if li == 0 and text == "SITE":   # the same pixel data also feeds the site
+                mid = (a1 + b0) / 2
+                body.append(f'<path fill="{STONE}" d="M{num(mid - 2)} {num(cy - 10)}h4v20h-4zM{num(mid - 10)} {num(cy - 2)}h20v4h-20z"/>')
+            else:
+                body.append(arrow(a1 + 8, b0 - 6, cy))
+        # a pixel travelling along the lane
+        span = centers[-1][0] - centers[0][1]
+        style.append(f".f{li}{{--d:{num(span)}px;animation:flow {3 + li * 0.6:.1f}s linear {li * 0.8:.1f}s infinite}}")
+        body.append(f'<rect class="f{li}" x="{num(centers[0][1])}" y="{num(cy - 3)}" width="6" height="6" fill="{GLOW}"/>')
+    H = 24 + len(PIPELINE) * lane_h
+    style.append(REDUCED)
+    alt = ("그림: Python 스크립트 → SVG → README와 사이트 · 웹 사이트: Remix 3 → Vite → Nitro → Vercel → 배포 · "
+           "기여 뱀: 매일 → GitHub Actions → 뱀 애니메이션 → output 브랜치")
+    return svg(W, H, alt, "".join(panel(W, H) + body), "".join(style))
 
 
 def bedrock() -> str:
@@ -762,6 +1137,9 @@ def main() -> None:
         "header-dark.svg": header(dark=True),
         "terminal.svg": terminal(),
         "gear.svg": gear_panel(),
+        "about.svg": about_panel(),
+        "projects.svg": project_chart(),
+        "pipeline.svg": pipeline(),
         "shaft/entrance-light.svg": entrance(dark=False),
         "shaft/entrance-dark.svg": entrance(dark=True),
         "shaft/bedrock.svg": bedrock(),
