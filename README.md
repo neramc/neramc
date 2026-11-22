@@ -21,11 +21,12 @@
 
 </div>
 
-<a id="about"></a>
+<div id="about">
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/shaft/1-about-dark.svg">
   <img src="assets/shaft/1-about-light.svg" width="100%" alt="-12m · 소개 (About)">
 </picture>
+</div>
 
 안녕하세요, **neramc**입니다. 브라우저에서 도는 사이트부터 Windows 유틸리티, 세 운영체제에서 도는 마크다운 편집기, 마인크래프트 서버 플러그인까지 만들어 왔습니다. 공개 저장소에는 Rust, TypeScript, C#, Kotlin, Java로 만든 프로젝트가 있습니다.<br>
 <sub>Hi, I'm neramc. I build things across the stack — websites, Windows utilities, cross-platform editors and Minecraft server plugins.</sub>
@@ -37,11 +38,12 @@
 - **규칙은 빌드가 지키게 합니다.** Markdown Studio는 계층 간 참조 방향을 아키텍처 테스트로, CommonMark 스펙 적합성을 CI로 확인합니다. Quill은 README 스크린샷까지 실제 배포 바이너리를 가상 디스플레이에서 실행해 찍었습니다.
 - **반복 작업은 자동화합니다.** Linuxhub의 배포판 데이터는 GitHub Actions가 6시간마다 갱신하고, Connection Verify는 CI가 버전을 올려 두 가지 빌드를 함께 릴리스합니다. App Deleter는 태그를 푸시하면 실행 파일과 SHA-256이 릴리스에 올라갑니다.
 
-<a id="inventory"></a>
+<div id="inventory">
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/shaft/2-inventory-dark.svg">
   <img src="assets/shaft/2-inventory-light.svg" width="100%" alt="-24m · 인벤토리 (Inventory)">
 </picture>
+</div>
 
 **장착 중** <sub>Active · 카드를 누르면 저장소로 이동합니다</sub>
 
@@ -134,21 +136,23 @@ C#과 .NET 10, Avalonia로 만든 마크다운 편집기입니다. 미리보기�
 
 </details>
 
-<a id="gear"></a>
+<div id="gear">
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/shaft/3-gear-dark.svg">
   <img src="assets/shaft/3-gear-light.svg" width="100%" alt="-36m · 장비 (Gear)">
 </picture>
+</div>
 
 <img src="assets/gear.svg" width="100%" alt="언어: Rust, TypeScript, C#, Kotlin, Java · 프레임워크: Remix, Astro, .NET, Avalonia, Slint, Compose Multiplatform · 도구: Bun, Vite, Gradle, Maven, GitHub Actions, Vercel, Playwright">
 
 <sub>프로젝트 안에서 쓴 라이브러리: rayon · ropey · Markdig · SkiaSharp · TextMateSharp · Nitro · Paper API</sub>
 
-<a id="workshop"></a>
+<div id="workshop">
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/shaft/4-workshop-dark.svg">
   <img src="assets/shaft/4-workshop-light.svg" width="100%" alt="-48m · 작업실 (Workshop)">
 </picture>
+</div>
 
 <a href="https://neramc.vercel.app"><img src="assets/portfolio-preview.png" width="100%" alt="웹 포트폴리오 neramc.vercel.app 첫 화면: 픽셀 글씨 NERAMC, 프로필 사진, 터미널"></a>
 
@@ -160,11 +164,12 @@ C#과 .NET 10, Avalonia로 만든 마크다운 편집기입니다. 미리보기�
 - **웹 포트폴리오는 [Remix 3](https://remix.run)로 서버에서 그립니다.** 브라우저에서 하이드레이트되는 건 터미널 하나뿐이고, 자바스크립트가 꺼져 있어도 같은 명령어를 서버가 처리합니다. Vite로 빌드하고 Nitro로 Vercel에 배포합니다. → [`portfolio/`](portfolio)
 - **기여 그래프 뱀은 매일 새로 그려집니다.** GitHub Actions가 기여 기록으로 애니메이션을 만들어 `output` 브랜치에 올립니다. → [`snake.yml`](.github/workflows/snake.yml)
 
-<a id="logs"></a>
+<div id="logs">
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/shaft/5-logs-dark.svg">
   <img src="assets/shaft/5-logs-light.svg" width="100%" alt="-60m · 기록 (Logs)">
 </picture>
+</div>
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://github-readme-stats.vercel.app/api/top-langs/?username=neramc&layout=compact&bg_color=141012&title_color=ff9a63&text_color=d8d1cc&border_radius=0&hide_border=true&disable_animations=true">
